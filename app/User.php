@@ -10,6 +10,6 @@ class User
      * @var array
      */
     protected $fillable = [
-        'username'
+        'name'
     ];
 }
