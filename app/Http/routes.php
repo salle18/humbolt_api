@@ -15,14 +15,14 @@ Route::post('login', 'AuthController@login');
 
 Route::group(['prefix' => 'api/v1'], function () {
 
-    Route::group(['prefix' => 'csmp', 'namespace' => 'App\Http\Controllers'], function () {
+    Route::group(['prefix' => 'csmp'], function () {
 
         Route::get('blocks', 'CsmpController@blocks');
 
         Route::get('methods', 'CsmpController@methods');
     });
 
-    Route::group(['prefix' => 'csmp', 'namespace' => 'App\Http\Controllers', 'middleware' => ['jwt.auth']], function () {
+    Route::group(['prefix' => 'csmp', 'middleware' => ['jwt.auth']], function () {
 
         Route::post('simulate', 'CsmpController@simulate');
 
@@ -35,7 +35,7 @@ Route::group(['prefix' => 'api/v1'], function () {
         Route::delete('simulation/{id}', 'CsmpController@destroy');
     });
 
-    Route::group(['prefix' => 'gpss', 'namespace' => 'App\Http\Controllers', 'middleware' => ['jwt.auth']], function () {
+    Route::group(['prefix' => 'gpss', 'middleware' => ['jwt.auth']], function () {
 
         Route::post('simulate', 'GpssController@simulate');
 

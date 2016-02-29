@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Elab\Csmp\Config;
+use Elab\Csmp\Config as CsmpConfig;
 
 class CsmpController extends Controller
 {
@@ -23,7 +23,7 @@ class CsmpController extends Controller
 
     public function blocks()
     {
-        $config = new Config();
+        $config = new CsmpConfig();
         $blocks = $config->blocks();
         return response()->json(array_map(function ($block) {
             return $block->getMetaJSON();
@@ -32,7 +32,7 @@ class CsmpController extends Controller
 
     public function methods()
     {
-        $config = new Config();
+        $config = new CsmpConfig();
         $methods = $config->methods();
         return response()->json(array_map(function ($method) {
             return $method->getMetaJSON();
