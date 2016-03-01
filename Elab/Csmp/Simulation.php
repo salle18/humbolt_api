@@ -71,7 +71,7 @@ class Simulation
         if (is_a($block, Constant::class)) {
             $this->constants[] = $block;
         }
-        $this->blocks = $block;
+        $this->blocks[] = $block;
     }
 
     /**
@@ -328,8 +328,8 @@ class Simulation
             /**
              * Rekonstruišemo sve ulaze na bloku.
              */
-            for ($j = 0; $j < count($JSONBlock->inputs); $j++) {
-                $index = $JSONBlock->inputs[$j];
+            for ($j = 0; $j < count($JSONBlock["inputs"]); $j++) {
+                $index = $JSONBlock["inputs"][$j];
                 $block->inputs[$j] = $index > -1 ? $this->blocks[$index] : new EmptyBlock();
             }
         }
