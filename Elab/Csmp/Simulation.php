@@ -2,8 +2,8 @@
 
 namespace Elab\Csmp;
 
-use Elab\Csmp\blocks\Integrator;
 use Elab\Csmp\blocks\Constant;
+use Elab\Csmp\blocks\Integrator;
 use Elab\Csmp\exceptions\SimulationException;
 
 class Simulation
@@ -48,6 +48,10 @@ class Simulation
      * Svi rezultati simulacije.
      */
     private $results = [];
+    /**
+     * Red Butcherove tabele koji se trenutno izvršava, potrebno zbog optimizacije IoT elementa.
+     */
+    public $step = 0;
 
     private $config;
 
