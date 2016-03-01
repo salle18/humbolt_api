@@ -20,7 +20,8 @@ abstract class RungeKutta extends IntegrationMethod
      */
     private $integrators = [];
 
-    public function getTable() {
+    public function getTable()
+    {
         return $this->table;
     }
 
@@ -58,6 +59,7 @@ abstract class RungeKutta extends IntegrationMethod
              * Prvi red se preskače.
              */
             for ($step = 1; $step < count($this->table); $step++) {
+                $this->simulation->step = $step;
                 for ($i = 0; $i < count($this->integrators); $i++) {
                     $integrator = &$this->integrators[$i];
                     /**
