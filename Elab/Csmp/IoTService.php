@@ -28,16 +28,15 @@ class IoTService
             "inputs" => array_map(function ($block) {
                 return $block->result;
             }, $this->block->inputs),
-            "connections" => array_map(function ($block, $index) {
-                return is_a($block, EmptyBlock::class) ? -1 : $index;
+            "connections" => array_map(function ($block) {
+                return !is_a($block, EmptyBlock::class);
             }, $this->block->inputs),
             "time" => $this->block->getSimulation()->getTimer()
         ];
-       $response = $this->client->request("GET", $this->block->stringParams[0], [
+        $response = $this->client->request("GET", $this->block->stringParams[0], [
             "query" => $params
         ]);
-        return $response->getBody();
+        return $response->getBody()->getContents();
     }
-
 
 }
