@@ -38,6 +38,8 @@ class IoT extends Block
 
     public function calculateResult()
     {
-        $this->result = $this->service->load();
+        if (!$this->simulation->optimizeAsync || $this->simulation->step === 1) {
+            $this->result = $this->service->load();
+        }
     }
 }
