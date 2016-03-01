@@ -49,7 +49,7 @@ abstract class RungeKutta extends IntegrationMethod
             for ($i = 0;
                  $i < count($this->integrators);
                  $i++) {
-                $integrator = $this->integrators[$i];
+                $integrator = &$this->integrators[$i];
                 $integrator["previous"] = $integrator["block"]->result;
             }
 
@@ -59,7 +59,7 @@ abstract class RungeKutta extends IntegrationMethod
              */
             for ($step = 1; $step < count($this->table); $step++) {
                 for ($i = 0; $i < count($this->integrators); $i++) {
-                    $integrator = $this->integrators[$i];
+                    $integrator = &$this->integrators[$i];
                     /**
                      * Za svaki korak se računa novi koeficijent.
                      */
