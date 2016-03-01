@@ -2,4 +2,4 @@
 
 namespace Elab\Csmp\Exceptions;
 
-class QuitSimulationException extends \Exception {}
+class QuitSimulationException extends CsmpException {}

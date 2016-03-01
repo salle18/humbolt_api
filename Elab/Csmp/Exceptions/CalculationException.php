@@ -2,4 +2,4 @@
 
 namespace Elab\Csmp\Exceptions;
 
-class CalculationException extends \Exception {}
+class CalculationException extends CsmpException {}

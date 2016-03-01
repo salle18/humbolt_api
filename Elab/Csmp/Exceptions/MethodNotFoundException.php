@@ -2,4 +2,4 @@
 
 namespace Elab\Csmp\Exceptions;
 
-class MethodNotFoundException extends \Exception {}
+class MethodNotFoundException extends CsmpException {}
