@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCsmpsimulationsTable extends Migration
+class CreateGpsssimulationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,7 +12,7 @@ class CreateCsmpsimulationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('csmpsimulations', function (Blueprint $table) {
+        Schema::create('gpss_simulations', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->string('description');
@@ -30,6 +30,6 @@ class CreateCsmpsimulationsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('csmpsimulations');
+        Schema::drop('gpss_simulations');
     }
 }
