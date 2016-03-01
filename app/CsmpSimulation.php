@@ -9,4 +9,9 @@ class CsmpSimulation extends Model
     protected $fillable = [
         'description', 'data'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

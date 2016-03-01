@@ -18,4 +18,14 @@ class User extends Model implements AuthenticatableContract
     protected $fillable = [
         'name'
     ];
+
+    public function csmpsimulations()
+    {
+        return $this->hasMany(CsmpSimulation::class);
+    }
+
+    public function gpsssimulations()
+    {
+        return $this->hasMany(GpssSimulation::class);
+    }
 }
