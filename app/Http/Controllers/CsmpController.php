@@ -80,6 +80,8 @@ class CsmpController extends Controller
 
     public function destroy($id)
     {
-        //
+        $user = Auth::user();
+        $simulation = $user->csmpsimulations()->where('id', $id)->delete();
+        return response()->json(['deleted' => $id]);
     }
 }
