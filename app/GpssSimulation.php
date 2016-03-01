@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class GpssSimulation extends Model
 {
     protected $fillable = [
-        'description', 'data'
+        'description', 'user_id', 'data'
     ];
 
     public function user()
