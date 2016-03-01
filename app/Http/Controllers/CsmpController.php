@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\CsmpSimulation;
+use Auth;
 use Elab\Csmp\Config as CsmpConfig;
 use Elab\Csmp\Exceptions\CsmpException;
 use Elab\Csmp\Exceptions\QuitSimulationException;
@@ -54,7 +56,8 @@ class CsmpController extends Controller
 
     public function index()
     {
-        //
+        $user = Auth::user();
+        return response()->json($user->csmpsimulations()->get(['id', 'description', 'created_at']));
     }
 
     public function show($id)
@@ -62,9 +65,16 @@ class CsmpController extends Controller
         //
     }
 
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $user = Auth::user();
+        $data = $request->all();
+        $simulation = CsmpSimulation::create([
+            'user_id' => $user->id,
+            'description' => $data['description'],
+            'data' => json_encode($data)
+        ]);
+        return response()->json(['_id' => $simulation->id]);
     }
 
     public function destroy($id)
