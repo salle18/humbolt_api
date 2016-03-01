@@ -62,7 +62,8 @@ class CsmpController extends Controller
 
     public function show($id)
     {
-        //
+        $user = Auth::user();
+        return response()->json($user->csmpsimulations()->where('id', $id)->first(['data']));
     }
 
     public function create(Request $request)
