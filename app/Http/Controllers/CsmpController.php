@@ -22,7 +22,7 @@ class CsmpController extends Controller
     public function simulate(Request $request)
     {
         $simulation = new Simulation();
-        $simulation->loadJSON($request);
+        $simulation->loadJSON($request->all());
         try {
             $simulation->run();
             return response()->json($simulation->getSimulationResults());
