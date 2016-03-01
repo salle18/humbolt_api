@@ -34,6 +34,7 @@ class Config
 
     public function getMethod($method, $simulation = null)
     {
+        $method = "Elab\\Csmp\\Methods\\" . $method;
         $key = array_search($method, $this->method_classes);
         if ($key !== false) {
             return new $this->method_classes[$key]($simulation);
@@ -43,12 +44,12 @@ class Config
 
     public function getBlock($block)
     {
+        $block = "Elab\\Csmp\\Blocks\\" . $block;
         $key = array_search($block, $this->block_classes);
         if ($key !== false) {
             return new $this->block_classes[$key]();
         }
         throw new BlockNotFoundException("Nije pronađena implementacija datog bloka.");
-
     }
 
 }
