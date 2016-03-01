@@ -2,30 +2,29 @@
 
 namespace App\Providers;
 
-use Illuminate\Contracts\Auth\Access\Gate as GateContract;
-use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use App\Services\MoodleAuthService;
+use Illuminate\Support\ServiceProvider;
+use App\Contracts\AuthServiceContract;
 
 class AuthServiceProvider extends ServiceProvider
 {
-    /**
-     * The policy mappings for the application.
-     *
-     * @var array
-     */
-    protected $policies = [
-        'App\Model' => 'App\Policies\ModelPolicy',
-    ];
 
-    /**
-     * Register any application authentication / authorization services.
-     *
-     * @param  \Illuminate\Contracts\Auth\Access\Gate  $gate
-     * @return void
-     */
-    public function boot(GateContract $gate)
+    protected $defer = true;
+
+    public function register()
     {
-        $this->registerPolicies($gate);
+        $this->app->singleton(AuthServiceContract::class, function ($app) {
+            return new MoodleAuthService();
+        });
+    }
 
+    public function boot()
+    {
         //
+    }
+
+    public function provides()
+    {
+        return [AuthServiceContract::class];
     }
 }
