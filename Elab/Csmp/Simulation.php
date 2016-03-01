@@ -49,6 +49,13 @@ class Simulation
      */
     private $results = [];
 
+    private $config;
+
+    public function __construct()
+    {
+        $this->config = new Config();
+    }
+
     /**
      * Dodaje blok simulaciji.
      * Ako je integrator dodaje ga i u niz integratora.
@@ -86,7 +93,7 @@ class Simulation
         /**
          * Pravimo instancu metode integracije i prosleđujemo trenutno instancu simulacije kao parametar.
          */
-        $integrationMethod = new IntegrationMethodDefinitions[$this->method]($this);
+        $integrationMethod = $this->config->getMethod($this->method, $this);
 
         /**
          * Resetujemo rezultate elemenata i inicijalizujemo ih.
@@ -265,7 +272,8 @@ class Simulation
      */
     public function getIndex($block)
     {
-        return array_search($block, $this->blocks);
+        $key = array_search($block, $this->blocks);
+        return $key === false ? -1 : $key;
     }
 
     /**
@@ -304,7 +312,7 @@ class Simulation
         for ($i = 0; $i < count($JSONBlocks); $i++) {
             $JSONBlock = $JSONBlocks[$i];
             $className = $JSONBlock["className"];
-            $block = new BlockDefinitions[$className];
+            $block = $this->config->getBlock($className);
             $block->params = $JSONBlock["params"];
             $block->stringParams = $JSONBlock["stringParams"];
             $block->position = $JSONBlock["position"];
