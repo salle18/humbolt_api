@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Elab\Csmp\Config as CsmpConfig;
+use Elab\Csmp\Exceptions\CsmpException;
 use Elab\Csmp\Exceptions\QuitSimulationException;
 use Elab\Csmp\Simulation;
 use Illuminate\Http\Request;
@@ -28,7 +29,7 @@ class CsmpController extends Controller
             return response()->json($simulation->getSimulationResults());
         } catch (QuitSimulationException $e) {
             return response()->json($simulation->getSimulationResults());
-        } catch (\Exception $e) {
+        } catch (CsmpException $e) {
             return response()->json(["error" => $e->getMessage()]);
         }
     }
