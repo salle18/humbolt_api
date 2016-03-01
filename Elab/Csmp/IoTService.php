@@ -36,7 +36,7 @@ class IoTService
         $response = $this->client->request("GET", $this->block->stringParams[0], [
             "query" => $params
         ]);
-        return $response->getBody()->getContents();
+        return (float)$response->getBody()->getContents();
     }
 
 }
