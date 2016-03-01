@@ -303,7 +303,7 @@ class Simulation
         $this->method = $JSONSimulation["method"];
         $this->integrationInterval = $JSONSimulation["integrationInterval"];
         $this->duration = $JSONSimulation["duration"];
-        $this->optimizeAsync = $JSONSimulation["optimizeAsync"];
+        $this->optimizeAsync = isset($JSONSimulation["optimizeAsync"]) ? $JSONSimulation["optimizeAsync"] : false;
 
         $JSONBlocks = $JSONSimulation["blocks"];
         /**
