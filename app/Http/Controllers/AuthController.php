@@ -2,16 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Contracts\AuthServiceContract;
+use App\User;
 use Illuminate\Http\Request;
-use GuzzleHttp\Client;
+use JWTAuth;
+
 
 class AuthController extends Controller
 {
-
-    private $client;
-
-    private $moodle_uri = "https://moodle.elab.fon.bg.ac.rs/login/token.php";
-
     /**
      * Create a new controller instance.
      *
@@ -19,30 +17,24 @@ class AuthController extends Controller
      */
     public function __construct()
     {
-        $this->client = new Client();
+        //
     }
 
-    public function login(Request $request)
+    public function login(Request $request, AuthServiceContract $authService)
     {
         $name = $request->input("name");
         $password = $request->input("password");
-        $response = $this->client->request("POST", $this->moodle_uri, [
-            "verify" => false,
-            "form_params" => [
-                "username" => $name,
-                "password" => $password,
-                "service" => "moodle_mobile_app"
-            ]
-        ]);
-        $body = json_decode($response->getBody());
-        if ($body->token) {
-            if (is_null($user = User::where("name", $name))) {
+
+        $response = $authService->authenticate($name, $password);
+
+        if (isset($response["token"])) {
+            if (is_null($user = User::where("name", $name)->first())) {
                 $user = $this->create_user($name);
-                $token = JWTAuth::fromUser($user);
-                return response()->json(["token" => $token]);
             }
+            $token = JWTAuth::fromUser($user);
+            return response()->json(["token" => $token]);
         } else {
-            return $body;
+            return response()->json($response);
         }
     }
 
