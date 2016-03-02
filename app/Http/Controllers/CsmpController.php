@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\CsmpSimulation;
 use Auth;
+use App\CsmpSimulation;
 use Elab\Csmp\Config as CsmpConfig;
 use Elab\Csmp\Exceptions\CsmpException;
 use Elab\Csmp\Exceptions\QuitSimulationException;
@@ -13,20 +13,12 @@ use Illuminate\Http\Response;
 
 class CsmpController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        //
-    }
 
     public function simulate(Request $request)
     {
+        $data = $request->all();
         $simulation = new Simulation();
-        $simulation->loadJSON($request->all());
+        $simulation->loadJSON($data);
         try {
             $simulation->run();
             return response()->json($simulation->getSimulationResults());
