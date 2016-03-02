@@ -9,6 +9,7 @@ use Elab\Csmp\Exceptions\CsmpException;
 use Elab\Csmp\Exceptions\QuitSimulationException;
 use Elab\Csmp\Simulation;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class CsmpController extends Controller
 {
@@ -63,7 +64,8 @@ class CsmpController extends Controller
     public function show($id)
     {
         $user = Auth::user();
-        return response()->json($user->csmpsimulations()->where('id', $id)->first(['data']));
+        $data = $user->csmpsimulations()->where('id', $id)->first(['data']);
+        return response($data['data'], Response::HTTP_OK, ['Content-Type' => 'application/json']);
     }
 
     public function create(Request $request)
