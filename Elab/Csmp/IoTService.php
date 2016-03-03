@@ -2,7 +2,9 @@
 
 namespace Elab\Csmp;
 
+use Elab\Csmp\Exceptions\IoTException;
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\RequestException;
 
 class IoTService
 {
@@ -33,9 +35,14 @@ class IoTService
             }, $this->block->inputs),
             "time" => $this->block->getSimulation()->getTimer()
         ];
-        $response = $this->client->request("GET", $this->block->stringParams[0], [
-            "query" => $params
-        ]);
+        try {
+            $response = $this->client->request("GET", $this->block->stringParams[0], [
+                "query" => $params
+            ]);
+        } catch (RequestException $e) {
+            throw new IoTException("Greška prilikom konekcije na web servis IoT elementa.");
+        }
+
         return (float)$response->getBody()->getContents();
     }
 
