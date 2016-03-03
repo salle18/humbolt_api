@@ -25,7 +25,7 @@ class CsmpController extends Controller
         } catch (QuitSimulationException $e) {
             return response()->json($simulation->getSimulationResults());
         } catch (CsmpException $e) {
-            return response()->json(["error" => $e->getMessage()]);
+            return response()->json(["error" => $e->getMessage()], Response::HTTP_BAD_REQUEST);
         }
     }
 
