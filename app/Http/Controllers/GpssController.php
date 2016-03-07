@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\GpssSimulation;
 use Auth;
-use Elab\Gpss\GpssWebService;
+use Elab\Gpss\Simulation;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
@@ -15,8 +15,9 @@ class GpssController extends Controller
     public function simulate(Request $request)
     {
         $data = $request->all();
-        $webservice = new GpssWebService();
-        $webservice->simulate($data);
+        $simulation = new Simulation();
+        $results = $simulation->run($data);
+        return response()->json($results);
     }
 
     public function index()
