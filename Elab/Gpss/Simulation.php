@@ -4,7 +4,7 @@ namespace Elab\Gpss;
 
 use GuzzleHttp\Client;
 
-class GpssWebService
+class Simulation
 {
 
     private $client;
@@ -15,7 +15,7 @@ class GpssWebService
         $this->client = new Client();
     }
 
-    public function simulate($data)
+    public function run($data)
     {
         $response = $this->client->request('POST', $this->uri, [
             'form_data' => $data
