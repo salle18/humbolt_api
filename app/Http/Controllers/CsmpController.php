@@ -50,20 +50,14 @@ class CsmpController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $user_id = $user->id;
-        $simulations = CsmpSimulation::where(function ($query) use ($user_id) {
-            return $query->where('user_id', $user_id)->orWhere('user_id', 1);
-        });
-        return response()->json($simulations->get(['id', 'description', 'created_at']));
+        $simulations = $user->csmpsimulations()->get(['id', 'description', 'created_at']);
+        return response()->json($simulations);
     }
 
     public function show($id)
     {
         $user = Auth::user();
-        $user_id = $user->id;
-        $data = CsmpSimulation::where('id', $id)->where(function ($query) use ($user_id) {
-            return $query->where('user_id', $user_id)->orWhere('user_id', 1);
-        })->first(['data']);
+        $data = $user->csmpsimulations()->first(['data']);
         return response($data['data'], Response::HTTP_OK, ['Content-Type' => 'application/json']);
     }
 
@@ -71,11 +65,12 @@ class CsmpController extends Controller
     {
         $user = Auth::user();
         $data = $request->all();
-        $simulation = CsmpSimulation::create([
-            'user_id' => $user->id,
+        $simulation = new CsmpSimulation([
             'description' => $data['description'],
             'data' => json_encode($data)
         ]);
+        $simulation->user_id = $user->id;
+        $simulation->save();
         return response()->json(['_id' => $simulation->id]);
     }
 
