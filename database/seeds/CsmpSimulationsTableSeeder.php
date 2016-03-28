@@ -16,7 +16,9 @@ class CsmpSimulationsTableSeeder extends Seeder
             DB::table('csmp_simulations')->insert([
                 'user_id' => 1,
                 'description' => $simulation['description'],
-                'data' => json_encode($simulation)
+                'data' => json_encode($simulation),
+                "created_at" => \Carbon\Carbon::now(),
+                "updated_at" => \Carbon\Carbon::now(),
             ]);
         }
     }
