@@ -100,6 +100,7 @@ Nakon ovoga se kreira jwt token koji se vraća korisniku i koji klijent mora da 
 Sva logika za CSMP simulaciju nalazi se u folderu Elab/Csmp.
 
 ### Folderi
+===================
 
 ```
 +Blocks - klase svih blokova
@@ -165,7 +166,6 @@ export interface IJSONBlock {
 }
 ```
 
-
 IMetaJSONMethod opisuje jednu metodu integracije.
 ```
 export interface IMetaJSONMethod {
@@ -176,6 +176,8 @@ export interface IMetaJSONMethod {
 
 ## GPSS
 ===================
+
+Sva logika za GPSS simulaciju nalazi se u folderu Elab/Gpss.
 
 GPSS simulacija se izvršava na odvojenom gpss delphi serveru. Humbolt server služi kao među server između klijentske aplikacije humbolt client i gpss delphi servera.
 
