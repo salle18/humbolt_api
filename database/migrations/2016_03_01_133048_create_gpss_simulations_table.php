@@ -1,9 +1,9 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
-class CreateGpsssimulationsTable extends Migration
+class CreateGpssSimulationsTable extends Migration
 {
     /**
      * Run the migrations.
