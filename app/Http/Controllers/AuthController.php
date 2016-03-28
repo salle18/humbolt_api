@@ -10,15 +10,6 @@ use JWTAuth;
 
 class AuthController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        //
-    }
 
     public function login(Request $request, AuthServiceContract $authService)
     {
@@ -40,6 +31,9 @@ class AuthController extends Controller
 
     protected function create_user($name)
     {
-        return User::create(["name" => $name]);
+        $user = User::create(["name" => $name]);
+        $seeder = new \CsmpSimulationsTableSeeder();
+        $seeder->predefinedSimulations($user);
+        return $user;
     }
 }
