@@ -1,27 +1,184 @@
-# Laravel PHP Framework
+# Humbolt server
+===================
 
-[![Build Status](https://travis-ci.org/laravel/framework.svg)](https://travis-ci.org/laravel/framework)
-[![Total Downloads](https://poser.pugx.org/laravel/framework/d/total.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Stable Version](https://poser.pugx.org/laravel/framework/v/stable.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Unstable Version](https://poser.pugx.org/laravel/framework/v/unstable.svg)](https://packagist.org/packages/laravel/framework)
-[![License](https://poser.pugx.org/laravel/framework/license.svg)](https://packagist.org/packages/laravel/framework)
+## O projektu
+===================
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as authentication, routing, sessions, queueing, and caching.
+API server za CSMP i GPSS simulacije.
 
-Laravel is accessible, yet powerful, providing powerful tools needed for large, robust applications. A superb inversion of control container, expressive migration system, and tightly integrated unit testing support give you the tools you need to build any application with which you are tasked.
+Projekat je realizovan korišćenjem [Laravel framework-a](http://laravel.com/).
 
-## Official Documentation
+Ovaj projekat u sebi sadrži verziju klijenta [Humbolt client](https://bitbucket.org/humbolt/humbolt_client) ali je API napravljen
+tako da može da se koristi nezavisno od klijenta.
 
-Documentation for the framework can be found on the [Laravel website](http://laravel.com/docs).
+## Pokretanje projekta
+===================
 
-## Contributing
+Da biste pokrenuli projekat morate imati globalno instaliran [composer](https://getcomposer.org/).
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](http://laravel.com/docs/contributions).
+Nakon kloniranja projekta potrebno je instalirati biblioteke pokretanjem komande `composer install` u folderu projekta.
 
-## Security Vulnerabilities
+Potrebno je zatim napraviti kopiju fajla .env.example i preimenovati ga u .env.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
+U fajlu .env je potrebno definisati konfiguraciju okruženja, debug i parametre baze.
 
-## License
+Potrebno je kreirati bazu podataka čije smo parametre uneli u fajl .env.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
+Za produkciono okruženje postaviti
+
+`APP_ENV=production
+ APP_DEBUG=false`
+
+ APP_KEY se generiše pokretanjem komande `php artisan key:generate` u folderu projekta.
+
+ Zatim je potrebno migrirati bazu pokretanjem komande `php artisan migrate` čime se kreiraju neophodne tabele u bazi.
+
+## API
+===================
+
+### PUBLIC ROUTES
+
+#### Autentikacija
+* `POST /login` - vraća token ako je autentikacija uspešna
+    Request
+    {
+        name: string,
+        password: string
+    }
+    Response
+    {
+        token: string
+    }
+
+#### CSMP
+* `GET api/csmp/blocks` - vraća listu dostupnih blokova za simulaciju
+    Response
+        IMetaJSONBlock[]
+* `GET api/csmp/integrationmethods` - vraća listu dostupnih metoda integracije
+    Response
+        IMetaJSONMethod[]
+
+### PROTECTED ROUTES
+
+#### CSMP
+* `POST /csmp/simulate` - pokreće simulaciju, u telu zahteva očekuje IJSONSimulation objekat
+    Request
+        IJSONSimulation
+    Response
+        number[][]
+* `GET /csmp/simulation` - vraća listu sačuvanih simulacija za korisnika
+    Response
+        {
+        id: number,
+        description: string
+        }[]
+* `GET /csmp/simulation/:id` - vraća simulaciju za zadati id
+    Response
+        IJSONSimulation
+* `POST /csmp/simulation` - čuva simulaciju, u telu zahteva očekuje IJSONSimulation objekat
+    Request
+        IJSONSimulation
+* `DELETE /csmp/simulation/:id` - briše simulaciju za zadati id
+
+#### GPSS
+* `POST /gpss/simulate` - pokreće simulaciju, u telu zahteva očekuje IGpssSimulation
+* `GET /gpss/simulation` - vraća listu sačuvanih simulacija
+* `GET /gpss/simulation/:id` - vraća simulaciju za zadati id
+* `POST /gpss/simulation` - čuva simulaciju, u telu zahteva očekuje IGpssSimulation
+* `DELETE /gpss/simulation/:id` - briše simulaciju za zadati id
+
+## Autentikacija
+===================
+
+Za autentikaciju server koristi [JSON web tokens](https://jwt.io/).
+Da bi se proverila autentikacija server poziva [https://moodle.elab.fon.bg.ac.rs/](https://moodle.elab.fon.bg.ac.rs/) web servis odakle dobija moodle token ukoliko je korisnik uspešno ulogovan.
+Nakon ovoga se kreira jwt token koji se vraća korisniku i koji klijent mora da prosledi u zaglavlju svakog zahteva za sve putanje koje su zaštićene.
+
+## CSMP
+===================
+
+Sva logika za CSMP simulaciju nalazi se u folderu Elab/Csmp.
+
+### Folderi
+
+```
++Blocks - klase svih blokova
++config
+    blocks.php - niz dostupnih blokova
+    methods.php - niz dostupnih metoda
++Enums
+    BlockType.php - definiše tipove blokova, trenutno se ne koristi
++Exceptions - custom exceptions
++Helpers
+    Numbers.php - pomoćna klasa za rad sa decimalnim brojevima
++Methods - klase dostupnih metoda integracije
+Block.php - klasa jednog bloka simulacije, svi blokovi se izvode iz ove klase
+EmptyBlock.php - klasa praznog bloka
+IntegrationMethod.php - apstraktna klasa iz koje se izvode sve metode integracije
+IoTService.php - servis za rad sa IoT elementom
+RungeKutta.php - iplementacija generičke RungeKutta metode, sve metode integracije za sada se izvode iz ove klase
+Simulation.php - klasa simulacije
+```
+
+### CSMP tipovi
+===================
+
+IMetaJSONBlock opisuje jedan blok.
+```
+export interface IMetaJSONBlock {
+	className: string;
+	numberOfParams: number;
+	numberOfStringParams: number;
+	maxNumberOfInputs: number;
+	hasOutput:boolean;
+	sign: string;
+	description: string;
+	info: string;
+	paramDescription: string[];
+	stringParamDescription: string[];
+	isAsync: boolean;
+}
+```
+
+IJSONSimulation opisuje jednu simulaciju.
+```
+export interface IJSONSimulation {
+	description: string;
+	date: number;
+	method: string;
+	duration: number;
+	integrationInterval: number;
+	blocks: IJSONBlock[];
+	optimizeAsync: boolean;
+}
+```
+
+IJSONBlock sadrži sve parametre i poziciju bloka.
+```
+export interface IJSONBlock {
+	className: string;
+	position: IPosition;
+	params: number[];
+	stringParams: string[];
+	inputs: number[];
+	rotation: number;
+}
+```
+
+
+IMetaJSONMethod opisuje jednu metodu integracije.
+```
+export interface IMetaJSONMethod {
+    className: string;
+    description: string;
+}
+```
+
+## GPSS
+===================
+
+GPSS simulacija se izvršava na odvojenom gpss delphi serveru. Humbolt server služi kao među server između klijentske aplikacije humbolt client i gpss delphi servera.
+
+GPSS Delphi Server je zasnovan na postojećoj verziji programa GPSS napisanom u programskom jeziku Pascal, a potom proširen u programski jezik Delphi.
+Proširenje se vodi u dodavanju asinhronog HTTP web servera koji prihvata ulaze od strane klijentske aplikacije, a potom poziva podrutine koje vrše simulaciju.
+Na kraju, rezultat simulacije se štampa korisniku u JSON formatu.
