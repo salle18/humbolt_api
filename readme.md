@@ -174,6 +174,15 @@ export interface IMetaJSONMethod {
 }
 ```
 
+### CSMP Internet of Things
+===================
+
+U folderu webservices se nalaze primeri implementacije web servisa za IoT element.
+Prilikom poziva web servisa šalju se parametri bloka, vrednosti ulaza u blok i trenutno vreme izvršavanja simulacije.
+Pošto vrednost ulaza u blok može biti 0 to nije dovoljna informacija da li na tom ulazu u blok zaista postoji ulazni blok,
+iz tog razloga se šalje i niz konekcija koje imaju vrednost indeksa ulaza ako postoji prikačen blok ili -1 ako je ulaz prazan.
+Primer sa korišćenjem konekcija kako bi se našao prosek ulaza (ma koliko ulaza bilo) se nalazi u fajlu webservices/Average.php.
+
 ## GPSS
 ===================
 
