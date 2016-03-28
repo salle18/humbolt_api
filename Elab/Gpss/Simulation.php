@@ -18,7 +18,7 @@ class Simulation
     public function run($data)
     {
         $response = $this->client->request('POST', $this->uri, [
-            'form_data' => $data
+            'form_data' => ['gpss' => $data]
         ]);
         return $response->getBody()->getContents();
     }

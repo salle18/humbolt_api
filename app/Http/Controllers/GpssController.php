@@ -14,7 +14,7 @@ class GpssController extends Controller
 
     public function simulate(Request $request)
     {
-        $data = $request->all();
+        $data = $request->input('data');
         $simulation = new Simulation();
         $results = $simulation->run($data);
         return response()->json($results);
