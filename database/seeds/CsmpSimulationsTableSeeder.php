@@ -11,10 +11,15 @@ class CsmpSimulationsTableSeeder extends Seeder
      */
     public function run()
     {
+        //
+    }
+
+    public function predefinedSimulations($user)
+    {
         $simulations = $this->read_simulations();
         foreach ($simulations as $simulation) {
             DB::table('csmp_simulations')->insert([
-                'user_id' => 1,
+                'user_id' => $user->id,
                 'description' => $simulation['description'],
                 'data' => json_encode($simulation),
                 "created_at" => \Carbon\Carbon::now(),
