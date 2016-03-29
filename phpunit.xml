@@ -12,6 +12,9 @@
         <testsuite name="Application Test Suite">
             <directory>./tests/</directory>
         </testsuite>
+        <testsuite name="Elab/Csmp Test Suite">
+            <directory>./Elab/Csmp/tests/</directory>
+        </testsuite>
     </testsuites>
     <filter>
         <whitelist>
