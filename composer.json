@@ -28,7 +28,8 @@
     },
     "autoload-dev": {
         "classmap": [
-            "tests/TestCase.php"
+            "tests/TestCase.php",
+            "Elab/Csmp/tests/CsmpTest.php"
         ]
     },
     "scripts": {
