@@ -37,6 +37,16 @@ Za produkciono okruženje postaviti
 
  Ovde možete pronaći uputstvo za kreiranje [virtual host-a](http://www.techrepublic.com/blog/smb-technologist/create-virtual-hosts-in-a-wamp-server/) na wamp serveru.
 
+## Testiranje projekta
+===================
+
+Testove možete pokrenuti pokretanjem komande `vendor/bin/phpunit` u folderu projekta (\ na windowsu).
+Test suites su definisani u fajlu phpunit.xml.
+
+Testovi za Csmp i Gpss se nalaze u folderima Elab/Csmp/tests i Elab/Gpss/tests.
+
+Testovi aplikacije se nalaze u folderu ./tests.
+
 ## API
 ===================
 
