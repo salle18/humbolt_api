@@ -33,6 +33,10 @@ Za produkciono okruženje postaviti
 
  Zatim je potrebno migrirati bazu pokretanjem komande `php artisan migrate` čime se kreiraju neophodne tabele u bazi.
 
+ U folderu public se nalaze se javni fajlovi kojima server direktno pristupa, potrebno je napraviti virtuelni host na folder humbolt_server/public.
+
+ Ovde možete pronaći uputstvo za kreiranje [virtual host-a](http://www.techrepublic.com/blog/smb-technologist/create-virtual-hosts-in-a-wamp-server/) na wamp serveru.
+
 ## API
 ===================
 
