@@ -3,7 +3,6 @@
 namespace Elab\Csmp\Blocks;
 
 use Elab\Csmp\Block;
-use Elab\Csmp\Exceptions\CalculationException;
 
 /**
  * Arkus tangens ulaza.
@@ -19,11 +18,6 @@ class ArcTan extends Block
 
     public function calculateResult()
     {
-        $check = $this->params[1] * $this->inputs[0]->result + $this->params[2];
-        if ($check > 0) {
-            $this->result = $this->params[0] * atan($check);
-        } else {
-            throw new CalculationException("Vrednost za ArcTan je negativna.");
-        }
+        $this->result = $this->params[0] * atan($this->params[1] * $this->inputs[0]->result + $this->params[2]);
     }
 }
