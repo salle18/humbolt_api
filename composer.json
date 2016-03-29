@@ -29,7 +29,8 @@
     "autoload-dev": {
         "classmap": [
             "tests/TestCase.php",
-            "Elab/Csmp/tests/CsmpTest.php"
+            "Elab/Csmp/tests/CsmpTest.php",
+            "Elab/Gpss/tests/GpssTest.php"
         ]
     },
     "scripts": {
