@@ -5,11 +5,22 @@ namespace Elab\Csmp;
 use Elab\Csmp\Exceptions\BlockNotFoundException;
 use Elab\Csmp\Exceptions\MethodNotFoundException;
 
+/**
+ * Class Config
+ * Klasa koja se koristi za učitavanje dostupnih blokova i metoda integracije kao i za instanciranje blokova i metoda iz naziva klase.
+ *
+ * @package Elab\Csmp
+ */
 class Config
 {
 
+    /**
+     * @var string[] Niz dostupnih blokova.
+     */
     private $block_classes;
-
+    /**
+     * @var string[] Niz dostupnih metoda integracije.
+     */
     private $method_classes;
 
     public function __construct()
