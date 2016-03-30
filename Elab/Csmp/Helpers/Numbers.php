@@ -3,17 +3,24 @@
 namespace Elab\Csmp\helpers;
 
 /**
+ * Class Numbers
  * Klasa za rad sa point float brojevima.
+ *
+ * @package Elab\Csmp\helpers
  */
 class Numbers
 {
     /**
-     * Epsilon dozvoljena greška.
+     * @var float Epsilon dozvoljena greška.
      */
     const EPSILON = 0.00001;
 
     /**
-     * @return Da li su brojevi jednaki za dozvoljenu grešku.
+     * Da li su brojevi jednaki za dozvoljenu grešku.
+     *
+     * @param float $a
+     * @param float $b
+     * @return boolean
      */
     public static function equal($a, $b)
     {
@@ -21,10 +28,14 @@ class Numbers
     }
 
     /**
-     * @return Da li su brojevi celobrojno deljivi za zadatu grešku.
+     * Da li su brojevi celobrojno deljivi za zadatu grešku.
+     *
+     * @param float $a
+     * @param float $b
+     * @return boolean
      */
     public static function divideable($a, $b)
     {
-		return self::equal($a, $b * floor($a / $b));
-	}
+        return self::equal($a, $b * floor($a / $b));
+    }
 }
