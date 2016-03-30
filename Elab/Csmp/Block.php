@@ -231,7 +231,7 @@ abstract class Block
             "position" => $this->position,
             "params" => $this->params,
             "stringParams" => $this->stringParams,
-            "inputs" => array_map(function ($block) {
+            "inputs" => array_map(function (Block $block) {
                 return $block->getIndex();
             }, $this->inputs)
         ];
