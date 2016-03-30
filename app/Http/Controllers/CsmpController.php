@@ -54,7 +54,11 @@ class CsmpController extends Controller
     {
         $user = Auth::user();
         $simulation = $user->csmpsimulations()->where('id', $id)->first(['data']);
-        return response()->json($simulation['data']);
+        /**
+         * Pošto već čuvamo json podatke ne treba ih ponovo enkodovati.
+         * Zato vraćamo raw response sa postavljenim zaglavljem za json.
+         */
+        return response($simulation['data'], Response::HTTP_OK, ['Content-Type' => 'application/json']);
     }
 
     public function create(Request $request)
