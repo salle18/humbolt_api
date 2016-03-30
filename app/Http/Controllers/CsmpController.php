@@ -25,7 +25,7 @@ class CsmpController extends Controller
         } catch (QuitSimulationException $e) {
             return response()->json($simulation->getSimulationResults());
         } catch (CsmpException $e) {
-            return response()->json(["error" => $e->getMessage()], Response::HTTP_BAD_REQUEST);
+            return response()->json(["error" => $e->getMessage()], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -53,8 +53,8 @@ class CsmpController extends Controller
     public function show($id)
     {
         $user = Auth::user();
-        $data = $user->csmpsimulations()->where('id', $id)->first(['data']);
-        return response($data['data'], Response::HTTP_OK, ['Content-Type' => 'application/json']);
+        $simulation = $user->csmpsimulations()->where('id', $id)->first(['data']);
+        return response()->json($simulation['data']);
     }
 
     public function create(Request $request)
