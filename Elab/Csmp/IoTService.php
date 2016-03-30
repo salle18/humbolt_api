@@ -33,8 +33,8 @@ class IoTService
     /**
      * Poziva web servis i vraća rezultat izračunavanja bloka.
      *
-     * @throws IoTException
      * @return float
+     * @throws IoTException
      */
     public function load()
     {
