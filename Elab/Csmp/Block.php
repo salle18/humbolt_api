@@ -8,7 +8,7 @@ namespace Elab\Csmp;
  *
  * @package Elab\Csmp
  */
-abstract class Block
+abstract class Block implements \JsonSerializable
 {
 
     /**
@@ -307,7 +307,7 @@ abstract class Block
      *
      * @return array
      */
-    public function getMetaJSON()
+    public function jsonSerialize()
     {
         return [
             "className" => $this->className,
