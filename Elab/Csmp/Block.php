@@ -182,6 +182,16 @@ abstract class Block
     }
 
     /**
+     * Vraća niz ulaznih Blokova.
+     *
+     * @return Block[]
+     */
+    public function getInputs()
+    {
+        return $this->inputs;
+    }
+
+    /**
      * Postavlja ulaz bloka za zadati indeks.
      *
      * @param integer $index
