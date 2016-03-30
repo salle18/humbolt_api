@@ -182,6 +182,17 @@ abstract class Block
     }
 
     /**
+     * Vraća string parametar bloka sa zadatim indeksom.
+     *
+     * @param integer $index
+     * @return string
+     */
+    public function getStringParam($index)
+    {
+        return $this->stringParams[$index];
+    }
+
+    /**
      * Vraća niz ulaznih Blokova.
      *
      * @return Block[]
