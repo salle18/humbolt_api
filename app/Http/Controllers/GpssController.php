@@ -17,7 +17,7 @@ class GpssController extends Controller
         $data = $request->input('data');
         $simulation = new Simulation();
         $results = $simulation->run($data);
-        return response()->json($results);
+        return response($results, Response::HTTP_OK, ['Content-Type' => 'application/json']);
     }
 
     public function index()
