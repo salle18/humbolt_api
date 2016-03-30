@@ -8,7 +8,7 @@ namespace Elab\Csmp;
  *
  * @package Elab\Csmp
  */
-abstract class IntegrationMethod
+abstract class IntegrationMethod implements \JsonSerializable
 {
     /**
      * @var Simulation Simulacija koja se izvršava.
@@ -44,7 +44,7 @@ abstract class IntegrationMethod
      *
      * @return array
      */
-    public function getMetaJSON()
+    public function jsonSerialize()
     {
         return [
             "className" => $this->className,
