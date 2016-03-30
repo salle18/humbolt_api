@@ -193,6 +193,16 @@ abstract class Block
     }
 
     /**
+     * Postavlja string parametre bloka.
+     *
+     * @param string[] $stringParams
+     */
+    public function setStringParams($stringParams)
+    {
+        $this->stringParams = $stringParams;
+    }
+
+    /**
      * Vraća niz ulaznih Blokova.
      *
      * @return Block[]
@@ -211,6 +221,56 @@ abstract class Block
     public function setInput($index, Block $input)
     {
         $this->inputs[$index] = $input;
+    }
+
+    /**
+     * Postavlja da li je blok sortiran.
+     *
+     * @param boolean $sorted
+     */
+    public function setSorted($sorted)
+    {
+        $this->sorted = $sorted;
+    }
+
+    /**
+     * Vraća da li je blok sortiran u simulaciji.
+     *
+     * @return boolean
+     */
+    public function isSorted()
+    {
+        return $this->sorted;
+    }
+
+    /**
+     * Vraća trenutni rezultat bloka.
+     *
+     * @return float
+     */
+    public function getResult()
+    {
+        return $this->result;
+    }
+
+    /**
+     * Postavlja rezultat bloka.
+     *
+     * @param float $result
+     */
+    public function setResult($result)
+    {
+        $this->result = $result;
+    }
+
+    /**
+     * Postavlja poziciju bloka.
+     *
+     * @param array $position
+     */
+    public function setPosition($position)
+    {
+        $this->position = $position;
     }
 
     /**
