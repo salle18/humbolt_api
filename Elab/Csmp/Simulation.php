@@ -6,6 +6,13 @@ use Elab\Csmp\blocks\Constant;
 use Elab\Csmp\blocks\Integrator;
 use Elab\Csmp\exceptions\SimulationException;
 
+/**
+ * Class Simulation
+ * Simulacija u sebi sadrži niz blokova, pre simuliranja blokovi se moraju sortirati.
+ * Simulacija se možete učitavati i izvoziti u JSON.
+ *
+ * @package Elab\Csmp
+ */
 class Simulation
 {
     /**
