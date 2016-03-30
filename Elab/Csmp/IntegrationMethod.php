@@ -7,12 +7,21 @@ namespace Elab\Csmp;
  */
 abstract class IntegrationMethod
 {
+    /**
+     * @var Simulation Simulacija koja se izvršava.
+     */
     protected $simulation = null;
+    /**
+     * @var string Opis metode integracije.
+     */
     protected $description = "";
+    /**
+     * @var string Naziv klase metode integracije.
+     */
     protected $className = "IntegrationMethod";
 
     /**
-     * @param simulation Tekuća simulacija.
+     * @param Simulation $simulation
      */
     public function __construct(Simulation $simulation = null)
     {
@@ -28,7 +37,9 @@ abstract class IntegrationMethod
     }
 
     /**
-     * @return Naziv klase metode integracije.
+     * Vraća naziv i opis klase metode integracije.
+     *
+     * @return array
      */
     public function getMetaJSON()
     {
