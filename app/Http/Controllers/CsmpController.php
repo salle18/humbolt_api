@@ -33,18 +33,14 @@ class CsmpController extends Controller
     {
         $config = new CsmpConfig();
         $blocks = $config->blocks();
-        return response()->json(array_map(function ($block) {
-            return $block->getMetaJSON();
-        }, $blocks));
+        return response()->json($blocks);
     }
 
     public function methods()
     {
         $config = new CsmpConfig();
         $methods = $config->methods();
-        return response()->json(array_map(function ($method) {
-            return $method->getMetaJSON();
-        }, $methods));
+        return response()->json($methods);
     }
 
     public function index()
