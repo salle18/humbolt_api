@@ -26,7 +26,7 @@ class Simulation
     /**
      * @var boolean Da li treba optimizovati asinhrone pozive.
      */
-    private $optimizeAsync = true;
+    private $optimizeAsync = false;
     /**
      * @var Block[] Niz elemenata u simulaciji.
      */
@@ -318,6 +318,16 @@ class Simulation
     }
 
     /**
+     * Vraća red Butcherove tabele koji se izvršava.
+     *
+     * @return integer
+     */
+    public function getStep()
+    {
+        return $this->step;
+    }
+
+    /**
      * Postavlja red Butcherove tabele koji se trenutno izvršava.
      *
      * @param integer $step
@@ -325,6 +335,11 @@ class Simulation
     public function setStep($step)
     {
         $this->step = $step;
+    }
+
+    public function shouldOptimizeAsync()
+    {
+        return $this->optimizeAsync;
     }
 
     /**
