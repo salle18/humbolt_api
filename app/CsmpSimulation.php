@@ -7,7 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 class CsmpSimulation extends Model
 {
     protected $fillable = [
-        'description', 'user_id', 'data'
+        'description', 'data',
+    ];
+
+    protected $guarded = [
+        'user_id',
     ];
 
     public function user()
