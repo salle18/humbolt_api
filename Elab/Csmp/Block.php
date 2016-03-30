@@ -9,87 +9,83 @@ abstract class Block
 {
 
     /**
-     * Niz parametara bloka.
+     * @var float[] Niz parametara bloka.
      */
-    public $params = [];
+    protected $params = [];
     /**
-     * Niz elemenata koji su ulazi u trenutni blok.
+     * @var Block[] Niz blokova koji su ulazi u trenutni blok.
      */
-    public $inputs = [];
+    protected $inputs = [];
     /**
-     * Trenutni rezultat izračunavanja bloka.
+     * @var float Trenutni rezultat izračunavanja bloka.
      */
-    public $result = 0;
+    protected $result = 0;
     /**
-     * Da li je blok sortiran u nizu sortiranih elemenata u simulaciji.
+     * @var boolean Da li je blok sortiran u nizu sortiranih elemenata u simulaciji.
      */
-    public $sorted = false;
+    protected $sorted = false;
     /**
-     * Tekstualni parametri, svi blokovi prihvataju samo numeričke parametre a IoT blok prihvata i tekstualne za unos adrese web servisa.
+     * @var string[] Tekstualni parametri, svi blokovi prihvataju samo numeričke parametre a IoT blok prihvata i tekstualne za unos adrese web servisa.
      */
-    public $stringParams = [];
+    protected $stringParams = [];
     /**
-     * Top i left koordinate bloka.
+     * @var array Top i left koordinate bloka.
      */
-    public $position = ["top" => 0, "left" => 0];
+    protected $position = ["top" => 0, "left" => 0];
     /**
-     * Da li je blok trenutno aktivan.
+     * @var boolean Da li se blok izračunava asinhrono.
      */
-    public $active = false;
+    protected $isAsync = false;
     /**
-     * Da li se blok izračunava asinhrono.
-     */
-    public $isAsync = false;
-    /**
-     * Broj parametara bloka.
+     * @var integer Broj parametara bloka.
      */
     protected $numberOfParams = 0;
     /**
-     * Broj tekstualnih parametara bloka.
+     * @var integer Broj tekstualnih parametara bloka.
      */
     protected $numberOfStringParams = 0;
     /**
-     * Maksimalni broj ulaza u blok.
+     * @var integer Maksimalni broj ulaza u blok.
      */
     protected $maxNumberOfInputs = 0;
     /**
-     * Pokazuje da li blok ima izlaz, samo Quit blok nema izlaz.
+     * @var boolean Pokazuje da li blok ima izlaz, samo Quit blok nema izlaz.
      */
     protected $hasOutput = true;
     /**
-     * Svaki blok ima referencu na simulaciju u kojoj se nalazi. Neki blokovi zahtevaju pristup spoljnoj simulaciji kako bi se izračunali.
+     * @var Simulation Svaki blok ima referencu na simulaciju u kojoj se nalazi.
+     * Neki blokovi zahtevaju pristup spoljnoj simulaciji kako bi se izračunali npr. Time blok.
      */
     protected $simulation = null;
     /**
-     * Memorija bloka.
+     * @var float Memorija bloka.
      */
     protected $memory = 0;
     /**
-     * Oznaka bloka.
+     * @var string Oznaka bloka.
      */
     protected $sign = "";
     /**
-     * Opis bloka.
+     * @var string Opis bloka.
      */
     protected $description = "";
     /**
-     * Info, prošireni opis bloka.
+     * @var string Info, prošireni opis bloka.
      */
     protected $info = "";
     /**
-     * Naziv klase. Pošto će se kod minifikovati naziv klase mora da bude string.
+     * @var string Naziv klase bloka.
      */
     protected $className = "Block";
     /**
-     * Opisi numeričkih parametara.
+     * @var string[] Opisi numeričkih parametara.
      */
     protected $paramDescription = ["Param 1", "Param 2", "Param 3"];
 
     /**
-     * Opisi tekstualnih parametara.
+     * @var string[] Opisi tekstualnih parametara.
      */
     protected $stringParamDescription = ["Text 1", "Text 2", "Text 3"];
-
 
     /**
      * Inicijalizuje parametre i ulaze.
@@ -111,7 +107,7 @@ abstract class Block
         }
 
         /**
-         * Svi ulazni blokovi su na početku prazni blokovi sa rezulatom 0.
+         * Svi ulazni blokovi su na početku EmptyBlock sa rezulatom 0.
          */
         for ($i = 0; $i < $this->maxNumberOfInputs; $i++) {
             $this->inputs[$i] = new EmptyBlock();
@@ -119,7 +115,7 @@ abstract class Block
     }
 
     /**
-     * Svaki blok može da se inicijalizuje. Ova metoda se poziva prilikom pokretanja simulacije.
+     * Svaki blok može da se inicijalizuje. Ova metoda se poziva prilikom pokretanja simulacije za svaki blok.
      */
     public function init()
     {
@@ -135,7 +131,9 @@ abstract class Block
     }
 
     /**
-     * @return Simulacija u kojoj se blok nalazi.
+     * Vraća simulaciju u kojoj se blok nalazi.
+     *
+     * @return Simulation
      */
     public function getSimulation()
     {
@@ -143,8 +141,9 @@ abstract class Block
     }
 
     /**
-     * Postavlja referencu simulacije.
-     * @param simulation Simulacija u kojoj se blok nalazi.
+     * Postavlja referencu simulacije u kojoj se blok nalazi.
+     *
+     * @param Simulation $simulation
      */
     public function setSimulation(Simulation $simulation)
     {
@@ -152,7 +151,51 @@ abstract class Block
     }
 
     /**
-     * @return Redni broj bloka u simulaciji.
+     * Vraća niz parametara bloka.
+     *
+     * @return float[]
+     */
+    public function getParams()
+    {
+        return $this->params;
+    }
+
+    /**
+     * Postavlja parametre bloka.
+     *
+     * @param float[] $params
+     */
+    public function setParams($params)
+    {
+        $this->params = $params;
+    }
+
+    /**
+     * Postavlja parametar bloka sa zadatim indeksom.
+     *
+     * @param integer $index
+     * @param float $param
+     */
+    public function setParam($index, $param)
+    {
+        $this->params[$index] = $param;
+    }
+
+    /**
+     * Postavlja ulaz bloka za zadati indeks.
+     *
+     * @param integer $index
+     * @param Block $input
+     */
+    public function setInput($index, Block $input)
+    {
+        $this->inputs[$index] = $input;
+    }
+
+    /**
+     * Vraća redni broj bloka u simulaciji.
+     *
+     * @return integer
      */
     public function getIndex()
     {
@@ -160,7 +203,9 @@ abstract class Block
     }
 
     /**
-     * @return Da li su svi ulazni blokovi prazni ili sortirani u nizu sortiranih elemenata u simulaciji.
+     * Vraća da li su svi ulazni blokovi prazni ili sortirani u nizu sortiranih elemenata u simulaciji.
+     *
+     * @return boolean
      */
     public function hasSortedInputs()
     {
@@ -174,10 +219,10 @@ abstract class Block
     }
 
     /**
-     * Čuvamo naziv klase bloka, poziciju, parametre i ulaze kao indekse niza.
+     * Čuva naziv klase bloka, poziciju, parametre i ulaze kao indekse niza.
      * Nema potrebe da čuvamo izlaze jer ćemo ih rekonstruisati iz ulaza.
      *
-     * @return JSON objekat bloka.
+     * @return array
      */
     public function toJSON()
     {
@@ -193,9 +238,9 @@ abstract class Block
     }
 
     /**
-     * Čuvamo sve meta podatke o bloku: klasu, broj parametara, maksimalni broj ulaza, da li blok ima izlaz, oznaku i opis bloka.
+     * Čuva sve meta podatke o bloku: klasu, broj parametara, maksimalni broj ulaza, da li blok ima izlaz, oznaku i opis bloka.
      *
-     * @return JSON meta objekat bloka.
+     * @return array
      */
     public function getMetaJSON()
     {
