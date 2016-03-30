@@ -293,13 +293,9 @@ abstract class Block implements \JsonSerializable
      */
     public function hasSortedInputs()
     {
-        $sortedInputs = true;
-        for ($i = 0; $i < count($this->inputs); $i++) {
-            if (!$this->inputs[$i]->sorted) {
-                $sortedInputs = false;
-            }
-        }
-        return $sortedInputs;
+        return array_reduce($this->inputs, function ($carry, Block $input) {
+            return $carry && $input->sorted;
+        }, true);
     }
 
     /**
