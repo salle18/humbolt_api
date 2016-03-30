@@ -6,7 +6,10 @@ use Elab\Csmp\Block;
 use Elab\Csmp\Exceptions\CalculationException;
 
 /**
+ * Class Sqrt
  * Kvadratni koren ulaza.
+ *
+ * @package Elab\Csmp\Blocks
  */
 class Sqrt extends Block
 {

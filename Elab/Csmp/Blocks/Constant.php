@@ -5,7 +5,10 @@ namespace Elab\Csmp\Blocks;
 use Elab\Csmp\Block;
 
 /**
+ * Class Constant
  * Konstanta, uvek vraća vrednost prvog parametra.
+ *
+ * @package Elab\Csmp\Blocks
  */
 class Constant extends Block
 {

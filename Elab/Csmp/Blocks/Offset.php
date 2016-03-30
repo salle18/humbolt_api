@@ -5,7 +5,10 @@ namespace Elab\Csmp\Blocks;
 use Elab\Csmp\Block;
 
 /**
+ * Class Offset
  * Offset dodaje parametar na ulaz.
+ *
+ * @package Elab\Csmp\Blocks
  */
 class Offset extends Block
 {

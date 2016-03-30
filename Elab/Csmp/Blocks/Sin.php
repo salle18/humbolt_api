@@ -5,7 +5,10 @@ namespace Elab\Csmp\Blocks;
 use Elab\Csmp\Block;
 
 /**
+ * Class Sin
  * Sinus ulaza.
+ *
+ * @package Elab\Csmp\Blocks
  */
 class Sin extends Block
 {

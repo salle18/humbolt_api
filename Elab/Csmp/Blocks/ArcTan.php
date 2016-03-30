@@ -5,7 +5,10 @@ namespace Elab\Csmp\Blocks;
 use Elab\Csmp\Block;
 
 /**
+ * Class ArcTan
  * Arkus tangens ulaza.
+ *
+ * @package Elab\Csmp\Blocks
  */
 class ArcTan extends Block
 {

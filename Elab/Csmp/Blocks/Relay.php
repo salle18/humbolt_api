@@ -5,7 +5,10 @@ namespace Elab\Csmp\Blocks;
 use Elab\Csmp\Block;
 
 /**
+ * Class Relay
  * Vraća drugi ili treći ulaz zavisno da li je prvi ulaz veći od nule.
+ *
+ * @package Elab\Csmp\Blocks
  */
 class Relay extends Block
 {

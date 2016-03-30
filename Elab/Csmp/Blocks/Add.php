@@ -5,7 +5,10 @@ namespace Elab\Csmp\Blocks;
 use Elab\Csmp\Block;
 
 /**
+ * Class Add
  * Sabira ulazne blokove i množi ih sa respektivinim parametrima.
+ *
+ * @package Elab\Csmp\Blocks
  */
 class Add extends Block
 {

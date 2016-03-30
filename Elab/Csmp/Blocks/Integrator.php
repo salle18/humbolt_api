@@ -5,9 +5,11 @@ namespace Elab\Csmp\Blocks;
 use Elab\Csmp\Block;
 
 /**
- * Rezultat integratora je uvek poznat za trenutno računanje, prvi put rezultat je iz početnog uslova,
- * svako sledeće izračunavanje se vrši za narednu vrednost integratora.
+ * Class Integrator
+ * Rezultat integratora je uvek poznat za trenutno računanje, prvi put rezultat je iz početnog uslova, svako sledeće izračunavanje se vrši za narednu vrednost integratora.
  * Intermediate vrednost predstavlja prelazni rezulata integratora prilikom računanja sledećeg rezultata integratora.
+ *
+ * @package Elab\Csmp\Blocks
  */
 class Integrator extends Block
 {

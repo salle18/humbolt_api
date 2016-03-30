@@ -5,7 +5,10 @@ namespace Elab\Csmp\Blocks;
 use Elab\Csmp\Block;
 
 /**
+ * Class Cos
  * Kosinus ulaza.
+ *
+ * @package Elab\Csmp\Blocks
  */
 class Cos extends Block
 {

@@ -5,7 +5,10 @@ namespace Elab\Csmp\Blocks;
 use Elab\Csmp\Block;
 
 /**
+ * Class DeadZone
  * Mrtva zona. Ako se ulaz ne nalazi između parametara vraća 0.
+ *
+ * @package Elab\Csmp\Blocks
  */
 class DeadZone extends Block
 {

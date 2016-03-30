@@ -5,7 +5,10 @@ namespace Elab\Csmp\Blocks;
 use Elab\Csmp\Block;
 
 /**
+ * Class Invert
  * Invertuje znak ulaza.
+ *
+ * @package Elab\Csmp\Blocks
  */
 class Invert extends Block
 {

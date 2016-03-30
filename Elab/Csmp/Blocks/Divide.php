@@ -6,7 +6,10 @@ use Elab\Csmp\Block;
 use Elab\Csmp\Exceptions\CalculationException;
 
 /**
+ * Class Divide
  * Deli ulaze.
+ *
+ * @package Elab\Csmp\Blocks
  */
 class Divide extends Block
 {

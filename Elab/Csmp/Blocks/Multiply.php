@@ -5,7 +5,10 @@ namespace Elab\Csmp\Blocks;
 use Elab\Csmp\Block;
 
 /**
+ * Class Multiply
  * Množi ulaze.
+ *
+ * @package Elab\Csmp\Blocks
  */
 class Multiply extends Block
 {

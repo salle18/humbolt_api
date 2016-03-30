@@ -5,7 +5,10 @@ namespace Elab\Csmp\Blocks;
 use Elab\Csmp\Block;
 
 /**
+ * Class Time
  * Vraća tekuće vreme simulacije.
+ *
+ * @package Elab\Csmp\Blocks
  */
 class Time extends Block
 {

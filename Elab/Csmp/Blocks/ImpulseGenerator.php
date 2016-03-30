@@ -7,7 +7,10 @@ use Elab\Csmp\Exceptions\CalculationException;
 use Elab\Csmp\helpers\Numbers;
 
 /**
+ * Class ImpulseGenerator
  * Generator impulsa. Generiše povorku impulsa od trenutka kada je ulaz veći od nule.
+ *
+ * @package Elab\Csmp\Blocks
  */
 class ImpulseGenerator extends Block
 {

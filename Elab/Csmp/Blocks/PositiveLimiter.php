@@ -5,7 +5,10 @@ namespace Elab\Csmp\Blocks;
 use Elab\Csmp\Block;
 
 /**
+ * Class PositiveLimiter
  * Pozitivni ograničavač vraća ulaz ukoliko je manji od nule, a nulu inače.
+ *
+ * @package Elab\Csmp\Blocks
  */
 class PositiveLimiter extends Block
 {

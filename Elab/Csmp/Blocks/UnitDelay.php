@@ -5,7 +5,10 @@ namespace Elab\Csmp\Blocks;
 use Elab\Csmp\Block;
 
 /**
+ * Class UnitDelay
  * Jedinično kašnjenje vraća rezulata iz prethodnog ciklusa izračunavanja.
+ *
+ * @package Elab\Csmp\Blocks
  */
 class UnitDelay extends Block
 {
