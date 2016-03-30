@@ -11,15 +11,15 @@ class Simulation
     /**
      * @var Integrator[] Niz integratora.
      */
-    public $integrators = [];
+    private $integrators = [];
     /**
      * @var Constant[] Niz konstanti.
      */
-    public $constants = [];
+    private $constants = [];
     /**
      * @var boolean Da li treba optimizovati asinhrone pozive.
      */
-    public $optimizeAsync = true;
+    private $optimizeAsync = true;
     /**
      * @var Block[] Niz elemenata u simulaciji.
      */
@@ -51,7 +51,7 @@ class Simulation
     /**
      * @var integer Red Butcherove tabele koji se trenutno izvršava, potrebno zbog optimizacije IoT elementa.
      */
-    public $step = 0;
+    private $step = 0;
 
     /**
      * @var Config
@@ -289,6 +289,16 @@ class Simulation
     }
 
     /**
+     * Vraća niz integratora u simulaciji.
+     *
+     * @return Integrator[]
+     */
+    public function getIntegrators()
+    {
+        return $this->integrators;
+    }
+
+    /**
      * Vraća indeks zadatog bloka u simulaciji.
      *
      * @param Block $block
@@ -298,6 +308,16 @@ class Simulation
     {
         $key = array_search($block, $this->blocks);
         return $key === false ? -1 : $key;
+    }
+
+    /**
+     * Postavlja red Butcherove tabele koji se trenutno izvršava.
+     *
+     * @param integer $step
+     */
+    public function setStep($step)
+    {
+        $this->step = $step;
     }
 
     /**
