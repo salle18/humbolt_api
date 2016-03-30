@@ -330,45 +330,45 @@ class Simulation
     /**
      * Učitavamo simulaciju iz niza.
      *
-     * @param array $JSONSimulation
+     * @param array $simulation
      */
-    public function loadJSON($JSONSimulation)
+    public function loadArray($simulation)
     {
         /**
          * Pre učitavanja elemenata resetujemo simulaciju.
          */
         $this->reset();
 
-        $this->method = $JSONSimulation["method"];
-        $this->integrationInterval = $JSONSimulation["integrationInterval"];
-        $this->duration = $JSONSimulation["duration"];
-        $this->optimizeAsync = isset($JSONSimulation["optimizeAsync"]) ? $JSONSimulation["optimizeAsync"] : false;
+        $this->method = $simulation["method"];
+        $this->integrationInterval = $simulation["integrationInterval"];
+        $this->duration = $simulation["duration"];
+        $this->optimizeAsync = isset($simulation["optimizeAsync"]) ? $simulation["optimizeAsync"] : false;
 
-        $JSONBlocks = $JSONSimulation["blocks"];
+        $blocksArray = $simulation["blocks"];
         /**
          * Samo dodajemo blokove u simulaciju.
          */
-        for ($i = 0; $i < count($JSONBlocks); $i++) {
-            $JSONBlock = $JSONBlocks[$i];
-            $className = $JSONBlock["className"];
+        for ($i = 0; $i < count($blocksArray); $i++) {
+            $blockArray = $blocksArray[$i];
+            $className = $blockArray["className"];
             $block = $this->config->getBlock($className);
-            $block->setParams($JSONBlock["params"]);
-            $block->setStringParams($JSONBlock["stringParams"]);
-            $block->setPosition($JSONBlock["position"]);
+            $block->setParams($blockArray["params"]);
+            $block->setStringParams($blockArray["stringParams"]);
+            $block->setPosition($blockArray["position"]);
             $this->addBlock($block);
         }
 
         /**
          * Ponovo prolazimo kroz sve blokove i dodajemo veze.
          */
-        for ($i = 0; $i < count($JSONBlocks); $i++) {
-            $JSONBlock = $JSONBlocks[$i];
+        for ($i = 0; $i < count($blocksArray); $i++) {
+            $blockArray = $blocksArray[$i];
             $block = $this->blocks[$i];
             /**
              * Rekonstruišemo sve ulaze na bloku.
              */
-            for ($j = 0; $j < count($JSONBlock["inputs"]); $j++) {
-                $index = $JSONBlock["inputs"][$j];
+            for ($j = 0; $j < count($blockArray["inputs"]); $j++) {
+                $index = $blockArray["inputs"][$j];
                 $input = $index > -1 ? $this->blocks[$index] : new EmptyBlock();
                 $block->setInput($j, $input);
             }

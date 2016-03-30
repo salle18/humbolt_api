@@ -18,7 +18,7 @@ class CsmpController extends Controller
     {
         $data = $request->all();
         $simulation = new Simulation();
-        $simulation->loadJSON($data);
+        $simulation->loadArray($data);
         try {
             $simulation->run();
             return response()->json($simulation->getSimulationResults());
