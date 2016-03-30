@@ -22,10 +22,6 @@ abstract class RungeKutta extends IntegrationMethod
      * @var float[][] Butcherova metoda koja definiše metodu integracije.
      */
     protected $table = [];
-    /**
-     * @var Integrator[] Niz integratora u simulaciji.
-     */
-    private $integrators = [];
 
     /**
      * Vraća Butcherovu tabelu za metodu.
@@ -46,7 +42,6 @@ abstract class RungeKutta extends IntegrationMethod
          * Inicijalizuje integratore, uzima trajanje i interval integracije simulacije.
          */
         $this->table = $this->getTable();
-        $this->init();
         $duration = $this->simulation->getDuration();
         $interval = $this->simulation->getIntegrationInterval();
         $timer = 0;
@@ -56,17 +51,19 @@ abstract class RungeKutta extends IntegrationMethod
         $this->simulation->setResults();
         $this->simulation->saveResults();
 
+        /**
+         * @var Integrator[] Niz stanja integratora u simulaciji.
+         */
+        $integrators = $this->simulation->getIntegrators();
+
         while ($timer < $duration) {
             $stepInterval = 0;
 
             /**
              * Za svaki integrator pamti početnu vrednost.
              */
-            for ($i = 0;
-                 $i < count($this->integrators);
-                 $i++) {
-                $integrator = &$this->integrators[$i];
-                $integrator["previous"] = $integrator["block"]->result;
+            for ($i = 0; $i < count($integrators); $i++) {
+                $integrators[$i]->setPrevious();
             }
 
             /**
@@ -74,21 +71,23 @@ abstract class RungeKutta extends IntegrationMethod
              * Prvi red se preskače.
              */
             for ($step = 1; $step < count($this->table); $step++) {
-                $this->simulation->step = $step;
-                for ($i = 0; $i < count($this->integrators); $i++) {
-                    $integrator = &$this->integrators[$i];
+                $this->simulation->setStep($step);
+                for ($i = 0; $i < count($integrators); $i++) {
+
+                    $integrator = $integrators[$i];
+
                     /**
-                     * Za svaki korak se računa novi koeficijent.
+                     * Za svaki korak se računa novi inkrement.
                      */
-                    $integrator["k"][$step] = $interval * $integrator["block"]->getIntermediate();
-                    $result = $integrator["previous"];
+                    $integrator->setIncrement($step, $interval * $integrator->getIntermediate());
+                    $result = $integrator->getPrevious();
                     /**
-                     * Novi rezultat se dobija kao suma proizvoda iz tekućeg reda Butcherove tabele i koeficijenata k.
+                     * Novi rezultat se dobija kao suma proizvoda iz tekućeg reda Butcherove tabele i inkrementa.
                      */
                     for ($j = 1; $j < $step + 1; $j++) {
-                        $result += $this->table[$step][$j] * $integrator["k"][$j];
+                        $result += $this->table[$step][$j] * $integrator->getIncrement($j);
                     }
-                    $integrator["block"]->result = $result;
+                    $integrator->setResult($result);
                 }
                 /**
                  * Povećava se vreme izvršavanja simulacije na osnovu prve kolone Butcherove tabele.
@@ -102,17 +101,6 @@ abstract class RungeKutta extends IntegrationMethod
              */
             $this->simulation->saveResults();
             $timer = $this->simulation->getTimer();
-        }
-    }
-
-    /**
-     * Puni integratore iz simulacije i postavlja koeficijente i početnu vrednost na 0.
-     */
-    public function init()
-    {
-        $integrators = $this->simulation->integrators;
-        for ($i = 0; $i < count($integrators); $i++) {
-            $this->integrators[] = ["block" => $integrators[$i], "k" => [0], "previous" => 0];
         }
     }
 }
