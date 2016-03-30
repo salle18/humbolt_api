@@ -48,7 +48,7 @@ class GpssController extends Controller
     public function destroy($id)
     {
         $user = Auth::user();
-        $simulation = $user->gpsssimulations()->where('id', $id)->delete();
+        $user->gpsssimulations()->where('id', $id)->delete();
         return response()->json(['deleted' => $id]);
     }
 }
