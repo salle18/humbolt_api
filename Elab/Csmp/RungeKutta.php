@@ -13,7 +13,6 @@ use Elab\Csmp\Blocks\Integrator;
  */
 abstract class RungeKutta extends IntegrationMethod
 {
-
     /**
      * @var string Opis metode integracije.
      */
