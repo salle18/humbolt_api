@@ -18,13 +18,11 @@ class Config
         $this->method_classes = require "config/methods.php";
     }
 
-    public function blocks()
-    {
-        return array_map(function ($block_class) {
-            return new $block_class();
-        }, $this->block_classes);
-    }
-
+    /**
+     * Vraća niz dostupnih methoda integracije.
+     *
+     * @return IntegrationMethod[]
+     */
     public function methods()
     {
         return array_map(function ($method_class) {
@@ -32,6 +30,26 @@ class Config
         }, $this->method_classes);
     }
 
+    /**
+     * Vraća niz dostupnih blokova.
+     *
+     * @return Block[]
+     */
+    public function blocks()
+    {
+        return array_map(function ($block_class) {
+            return new $block_class();
+        }, $this->block_classes);
+    }
+
+    /**
+     * Kreira instancu date metode po nazivu klase.
+     *
+     * @param string $method
+     * @param Simulation $simulation
+     * @return IntegrationMethod
+     * @throws MethodNotFoundException
+     */
     public function getMethod($method, $simulation = null)
     {
         $method = "Elab\\Csmp\\Methods\\" . $method;
@@ -42,6 +60,13 @@ class Config
         throw new MethodNotFoundException("Nije pronađena metoda integracije.");
     }
 
+    /**
+     * Kreira instancu datog bloka po nazivu zadate klase.
+     *
+     * @param string $block
+     * @return Block
+     * @throws BlockNotFoundException
+     */
     public function getBlock($block)
     {
         $block = "Elab\\Csmp\\Blocks\\" . $block;
