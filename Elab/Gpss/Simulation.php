@@ -18,9 +18,14 @@ class Simulation
     public function run($data)
     {
         $response = $this->client->post($this->uri, [
-            'form_params' => ['gpss' => $data]
+            'form_params' => ['gpss' => $this->parse($data)]
         ]);
         return $response->getBody()->getContents();
+    }
+
+    private function parse($data)
+    {
+        return str_replace("\n", "#", $data);
     }
 
 }
