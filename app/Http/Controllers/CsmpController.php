@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\CsmpSimulation;
 use Auth;
-use Elab\Csmp\Config as CsmpConfig;
+use Elab\Csmp\Config;
 use Elab\Csmp\Exceptions\CsmpException;
 use Elab\Csmp\Exceptions\QuitSimulationException;
 use Elab\Csmp\Simulation;
@@ -31,14 +31,14 @@ class CsmpController extends Controller
 
     public function blocks()
     {
-        $config = new CsmpConfig();
+        $config = new Config();
         $blocks = $config->blocks();
         return response()->json($blocks);
     }
 
     public function methods()
     {
-        $config = new CsmpConfig();
+        $config = new Config();
         $methods = $config->methods();
         return response()->json($methods);
     }
