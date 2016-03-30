@@ -328,20 +328,6 @@ class Simulation
     }
 
     /**
-     * Čuvamo nazive klasa elemenata, poziciju, parametre i ulaze kao indekse niza.
-     * Nema potrebe da čuvamo izlaze jer ćemo ih rekonstruisati iz ulaza.
-     *
-     * @return string
-     */
-    public function toJSON()
-    {
-        $result = array_map(function (Block $block) {
-            return $block->toJSON();
-        }, $this->blocks);
-        return json_encode($result);
-    }
-
-    /**
      * Učitavamo simulaciju iz niza.
      *
      * @param array $JSONSimulation

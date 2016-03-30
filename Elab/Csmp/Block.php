@@ -3,7 +3,10 @@
 namespace Elab\Csmp;
 
 /**
- * Apstraktna klasa Block. Svi csmp blokovi moraju biti izvedeni iz ove klase.
+ * Class Block
+ * Apstraktna klasa, svi csmp blokovi moraju biti izvedeni iz ove klase.
+ *
+ * @package Elab\Csmp
  */
 abstract class Block
 {
@@ -297,25 +300,6 @@ abstract class Block
             }
         }
         return $sortedInputs;
-    }
-
-    /**
-     * Čuva naziv klase bloka, poziciju, parametre i ulaze kao indekse niza.
-     * Nema potrebe da čuvamo izlaze jer ćemo ih rekonstruisati iz ulaza.
-     *
-     * @return array
-     */
-    public function toJSON()
-    {
-        return [
-            "className" => $this->className,
-            "position" => $this->position,
-            "params" => $this->params,
-            "stringParams" => $this->stringParams,
-            "inputs" => array_map(function (Block $block) {
-                return $block->getIndex();
-            }, $this->inputs)
-        ];
     }
 
     /**
