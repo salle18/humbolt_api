@@ -9,7 +9,13 @@ use GuzzleHttp\Exception\RequestException;
 class IoTService
 {
 
+    /**
+     * @var Block IoT blok za koji se poziva web servis.
+     */
     private $block;
+    /**
+     * @var Client
+     */
     private $client;
 
     public function __construct(Block $block)
@@ -19,24 +25,25 @@ class IoTService
     }
 
     /**
-     * Poziva web servis i upisuje rezultat u rezultat izračunavanja bloka.
+     * Poziva web servis i vraća rezultat izračunavanja bloka.
      *
-     * @return Promise objekat
+     * @throws IoTException
+     * @return float
      */
     public function load()
     {
         $params = [
-            "params" => $this->block->params,
+            "params" => $this->block->getParams(),
             "inputs" => array_map(function ($block) {
                 return $block->result;
-            }, $this->block->inputs),
+            }, $this->block->getInputs()),
             "connections" => array_map(function ($block) {
                 return !is_a($block, EmptyBlock::class);
-            }, $this->block->inputs),
+            }, $this->block->getInputs()),
             "time" => $this->block->getSimulation()->getTimer()
         ];
         try {
-            $response = $this->client->request("GET", $this->block->stringParams[0], [
+            $response = $this->client->request("GET", $this->block->getStringParam(0), [
                 "query" => $params
             ]);
         } catch (RequestException $e) {
