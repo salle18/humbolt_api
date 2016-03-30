@@ -9,50 +9,53 @@ use Elab\Csmp\exceptions\SimulationException;
 class Simulation
 {
     /**
-     * Niz integratora.
+     * @var Integrator[] Niz integratora.
      */
     public $integrators = [];
     /**
-     * Niz konstanti.
+     * @var Constant[] Niz konstanti.
      */
     public $constants = [];
     /**
-     * Da li treba optimizovati asinhrone pozive.
+     * @var boolean Da li treba optimizovati asinhrone pozive.
      */
     public $optimizeAsync = true;
     /**
-     * Niz elemenata u simulaciji.
+     * @var Block[] Niz elemenata u simulaciji.
      */
     private $blocks = [];
     /**
-     * Trenutno vreme izvršavanja simulacije.
+     * @var float Trenutno vreme izvršavanja simulacije.
      */
     private $timer = 0;
     /**
-     * Metoda simulacije.
+     * @var string Metoda simulacije.
      */
     private $method = "";
     /**
-     * Trajanje simulacije.
+     * @var float Trajanje simulacije.
      */
     private $duration = 0;
     /**
-     * Interval integracije.
+     * @var float Interval integracije.
      */
     private $integrationInterval = 0;
     /**
-     * Niz sortiranih elemenata simulacije.
+     * @var Block[] Niz sortiranih elemenata simulacije.
      */
     private $sorted = [];
     /**
-     * Svi rezultati simulacije.
+     * @var float[][] Svi rezultati simulacije.
      */
     private $results = [];
     /**
-     * Red Butcherove tabele koji se trenutno izvršava, potrebno zbog optimizacije IoT elementa.
+     * @var integer Red Butcherove tabele koji se trenutno izvršava, potrebno zbog optimizacije IoT elementa.
      */
     public $step = 0;
 
+    /**
+     * @var Config
+     */
     private $config;
 
     public function __construct()
@@ -61,10 +64,10 @@ class Simulation
     }
 
     /**
-     * Dodaje blok simulaciji.
-     * Ako je integrator dodaje ga i u niz integratora.
+     * Dodaje blok u simulaciju.
+     * Ako je integrator ili konstanta dodaje ga i u respektivni niz.
      *
-     * @param block Block koji se dodaje.
+     * @param Block
      */
     public function addBlock(Block $block)
     {
@@ -80,7 +83,6 @@ class Simulation
 
     /**
      * Pokretanje simulacije.
-     *
      */
     public function run()
     {
@@ -95,7 +97,7 @@ class Simulation
          */
         $this->preRunCheck();
         /**
-         * Pravimo instancu metode integracije i prosleđujemo trenutno instancu simulacije kao parametar.
+         * Pravimo instancu metode integracije i prosleđujemo instancu simulacije kao parametar.
          */
         $integrationMethod = $this->config->getMethod($this->method, $this);
 
@@ -145,33 +147,41 @@ class Simulation
     public function initBlocks()
     {
         for ($i = 0; $i < count($this->blocks); $i++) {
-            $this->blocks[$i]->result = 0;
-            $this->blocks[$i]->sorted = false;
+            $this->blocks[$i]->setResult(0);
+            $this->blocks[$i]->setSorted(false);
             $this->blocks[$i]->init();
         }
     }
 
     /**
      * Sortira blokove iz niza elemenata.
-     * Konstante, integratori i unitDelay se odmah sortiraju jer je rezulat izračunavanja poznat iz prethodnog intervala(previousValue). Ostali blokovi moraju da imaju sve sortirane ulaze da bi se sortirali.
+     * Konstante i integratori se odmah sortiraju jer je rezulat izračunavanja poznat iz prethodnog intervala(previousValue).
+     * Ostali blokovi moraju da imaju sve sortirane ulaze da bi se sortirali. EmptyBlock je uvek sortiran.
      */
     public function sortBlocks()
     {
         $this->sorted = [];
         $numberOfSorted = 0;
         $blocks = $this->blocks;
+        /**
+         * Sortiramo konstante i integratore.
+         */
         for ($i = 0; $i < count($blocks); $i++) {
             if (is_a($blocks[$i], Integrator::class) || is_a($blocks[$i], Constant::class)) {
-                $blocks[$i]->sorted = true;
+                $blocks[$i]->setSorted(true);
                 $this->sorted[] = $blocks[$i];
                 $numberOfSorted++;
             }
         }
         for ($i = 0; $i < count($blocks); $i++) {
-            if (!$blocks[$i]->sorted) {
+            if (!$blocks[$i]->isSorted()) {
                 $this->sorted[] = $blocks[$i];
             }
         }
+        /**
+         * Obezbeđujemo da ne dođe do beskonačne petlje ukoliko postoji ciklična petlja među blokovima.
+         * U tom slučaju prvi blok u ciklusu se postavlja na sortiran i nastavlja se sortiranje.
+         */
         $finished = false;
         while ($numberOfSorted < count($this->sorted) && !$finished) {
             $finished = true;
@@ -180,7 +190,7 @@ class Simulation
                 if ($block->hasSortedInputs()) {
                     $temp = $this->sorted[$numberOfSorted];
                     $this->sorted[$numberOfSorted] = $block;
-                    $block->sorted = true;
+                    $block->setSorted(true);
                     $this->sorted[$i] = $temp;
                     $numberOfSorted++;
                     $finished = false;
@@ -190,7 +200,7 @@ class Simulation
     }
 
     /**
-     * Čuva trenutne rezultate.
+     * Dodaje trenutne rezultate u multidimenzionalni niz rezultata.
      */
     public function saveResults()
     {
@@ -198,13 +208,15 @@ class Simulation
     }
 
     /**
-     * @return Trenutni rezultati svih elemenata.
+     * Trenutni rezultati svih blokova.
+     *
+     * @return float[]
      */
     public function getResults()
     {
         $results = [$this->timer];
         for ($i = 0; $i < count($this->blocks); $i++) {
-            $results[] = $this->blocks[$i]->result;
+            $results[] = $this->blocks[$i]->getResult();
         }
         return $results;
     }
@@ -224,11 +236,12 @@ class Simulation
         for ($i = 0; $i < count($this->integrators); $i++) {
             $this->integrators[$i]->calculateResult();
         }
-        return true;
     }
 
     /**
-     * @return Svi rezultati simulacije.
+     * Vraća multidimenzionalni niz svih rezultata simulacije.
+     *
+     * @return float[][]
      */
     public function getSimulationResults()
     {
@@ -236,7 +249,9 @@ class Simulation
     }
 
     /**
-     * @return Trenutno vreme izvršavanja simulacije.
+     * Trenutno vreme izvršavanja simulacije.
+     *
+     * @return float
      */
     public function getTimer()
     {
@@ -246,7 +261,7 @@ class Simulation
     /**
      * Povećava timer za zadati deo intervala integracije.
      *
-     * @param times Koliko delova intervala integracije.
+     * @param float $times
      */
     public function incrementInterval($times)
     {
@@ -254,7 +269,9 @@ class Simulation
     }
 
     /**
-     * @return Trajanje simulacije.
+     * Vraća trajanje simulacije.
+     *
+     * @return float
      */
     public function getDuration()
     {
@@ -262,7 +279,9 @@ class Simulation
     }
 
     /**
-     * @return Interval integracije.
+     *  Vraća interval integracije.
+     *
+     * @return float
      */
     public function getIntegrationInterval()
     {
@@ -270,11 +289,12 @@ class Simulation
     }
 
     /**
-     * Indeks zadatog bloka u simulaciji.
+     * Vraća indeks zadatog bloka u simulaciji.
      *
-     * @param block Block simulacije.
+     * @param Block $block
+     * @return integer
      */
-    public function getIndex($block)
+    public function getIndex(Block $block)
     {
         $key = array_search($block, $this->blocks);
         return $key === false ? -1 : $key;
@@ -284,18 +304,20 @@ class Simulation
      * Čuvamo nazive klasa elemenata, poziciju, parametre i ulaze kao indekse niza.
      * Nema potrebe da čuvamo izlaze jer ćemo ih rekonstruisati iz ulaza.
      *
-     * @return Niz json objekata simulacije.
+     * @return string
      */
     public function toJSON()
     {
-        $result = array_map(function ($block) {
+        $result = array_map(function (Block $block) {
             return $block->toJSON();
         }, $this->blocks);
         return json_encode($result);
     }
 
     /**
-     * @param JSONSimulation JSON iz kog učitavamo simulaciju.
+     * Učitavamo simulaciju iz niza.
+     *
+     * @param array $JSONSimulation
      */
     public function loadJSON($JSONSimulation)
     {
@@ -317,9 +339,9 @@ class Simulation
             $JSONBlock = $JSONBlocks[$i];
             $className = $JSONBlock["className"];
             $block = $this->config->getBlock($className);
-            $block->params = $JSONBlock["params"];
-            $block->stringParams = $JSONBlock["stringParams"];
-            $block->position = $JSONBlock["position"];
+            $block->setParams($JSONBlock["params"]);
+            $block->setStringParams($JSONBlock["stringParams"]);
+            $block->setPosition($JSONBlock["position"]);
             $this->addBlock($block);
         }
 
@@ -334,7 +356,8 @@ class Simulation
              */
             for ($j = 0; $j < count($JSONBlock["inputs"]); $j++) {
                 $index = $JSONBlock["inputs"][$j];
-                $block->inputs[$j] = $index > -1 ? $this->blocks[$index] : new EmptyBlock();
+                $input = $index > -1 ? $this->blocks[$index] : new EmptyBlock();
+                $block->setInput($j, $input);
             }
         }
     }
@@ -342,8 +365,7 @@ class Simulation
     /**
      * Resetuje sve nizove i brojače.
      */
-    public
-    function reset()
+    public function reset()
     {
         $this->blocks = [];
         $this->sorted = [];
