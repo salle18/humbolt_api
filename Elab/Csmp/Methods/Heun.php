@@ -5,13 +5,27 @@ namespace Elab\Csmp\Methods;
 use Elab\Csmp\RungeKutta;
 
 /**
+ * Class Heun
  * Heun metoda Runge Kutta drugog reda.
+ *
+ * @package Elab\Csmp\Methods
  */
 class Heun extends RungeKutta
 {
+    /**
+     * @var string Opis metode integracije.
+     */
     protected $description = "Heun";
+    /**
+     * @var string Naziv klase metode integracije.
+     */
     protected $className = "Heun";
 
+    /**
+     * Vraća Butcherovu tabelu za metodu.
+     *
+     * @return float[][]
+     */
     public function getTable()
     {
         return [

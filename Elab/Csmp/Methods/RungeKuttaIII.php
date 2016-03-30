@@ -5,14 +5,27 @@ namespace Elab\Csmp\Methods;
 use Elab\Csmp\RungeKutta;
 
 /**
+ * Class RungeKuttaIII
  * Klasična Runge Kutta metoda trećeg reda.
+ *
+ * @package Elab\Csmp\Methods
  */
 class RungeKuttaIII extends RungeKutta
 {
-
+    /**
+     * @var string Opis metode integracije.
+     */
     protected $description = "Runge Kutta III";
+    /**
+     * @var string Naziv klase metode integracije.
+     */
     protected $className = "RungeKuttaIII";
 
+    /**
+     * Vraća Butcherovu tabelu za metodu.
+     *
+     * @return float[][]
+     */
     public function getTable()
     {
         return [
