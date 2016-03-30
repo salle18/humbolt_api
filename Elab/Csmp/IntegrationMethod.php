@@ -3,7 +3,10 @@
 namespace Elab\Csmp;
 
 /**
+ * Class IntegrationMethod
  * Klasa metode integracije. Sve metoda integracije moraju biti izvedene iz ove klase.
+ *
+ * @package Elab\Csmp
  */
 abstract class IntegrationMethod
 {
