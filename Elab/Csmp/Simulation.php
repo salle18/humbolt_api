@@ -5,6 +5,8 @@ namespace Elab\Csmp;
 use Elab\Csmp\blocks\Constant;
 use Elab\Csmp\blocks\Integrator;
 use Elab\Csmp\exceptions\SimulationException;
+use Elab\Csmp\Factories\BlockFactory;
+use Elab\Csmp\Factories\IntegrationMethodFactory;
 
 /**
  * Class Simulation
@@ -59,15 +61,19 @@ class Simulation
      * @var integer Red Butcherove tabele koji se trenutno izvršava, potrebno zbog optimizacije IoT elementa.
      */
     private $step = 0;
-
     /**
-     * @var Config
+     * @var IntegrationMethodFactory
      */
-    private $config;
+    private $integrationMethodFactory;
+    /**
+     * @var BlockFactory
+     */
+    private $blockFactory;
 
     public function __construct()
     {
-        $this->config = new Config();
+        $this->integrationMethodFactory = new IntegrationMethodFactory();
+        $this->blockFactory = new BlockFactory();
     }
 
     /**
@@ -106,7 +112,7 @@ class Simulation
         /**
          * Pravimo instancu metode integracije i prosleđujemo instancu simulacije kao parametar.
          */
-        $integrationMethod = $this->config->getMethod($this->method, $this);
+        $integrationMethod = $this->integrationMethodFactory->create($this->method, $this);
 
         /**
          * Resetujemo rezultate elemenata i inicijalizujemo ih.
@@ -366,7 +372,7 @@ class Simulation
         for ($i = 0; $i < count($blocksArray); $i++) {
             $blockArray = $blocksArray[$i];
             $className = $blockArray["className"];
-            $block = $this->config->getBlock($className);
+            $block = $this->blockFactory->create($className);
             $block->setParams($blockArray["params"]);
             $block->setStringParams($blockArray["stringParams"]);
             $block->setPosition($blockArray["position"]);
