@@ -2,29 +2,44 @@
 
 namespace Elab\Csmp;
 
+use Elab\Csmp\Blocks\Integrator;
+
 /**
  * Generička klasa za sve Runge Kutta integracione metode. Izračunavanje se vrši na osnovu Butcherovih tabela.
  */
 abstract class RungeKutta extends IntegrationMethod
 {
 
+    /**
+     * @var string Opis metode integracije.
+     */
     protected $description = "";
+    /**
+     * @var string Naziv klase metode integracije.
+     */
     protected $className = "RungeKutta";
     /**
-     * Butcherova metoda koja definiše metodu integracije.
+     * @var float[][] Butcherova metoda koja definiše metodu integracije.
      */
     protected $table = [];
-
     /**
-     * Niz integratora u simulaciji.
+     * @var Integrator[] Niz integratora u simulaciji.
      */
     private $integrators = [];
 
+    /**
+     * Vraća Butcherovu tabelu za metodu.
+     *
+     * @return float[][]
+     */
     public function getTable()
     {
         return $this->table;
     }
 
+    /**
+     * Pokretanje metode integracije.
+     */
     public function run()
     {
         /**
@@ -88,7 +103,6 @@ abstract class RungeKutta extends IntegrationMethod
             $this->simulation->saveResults();
             $timer = $this->simulation->getTimer();
         }
-        return true;
     }
 
     /**
