@@ -8,5 +8,8 @@ namespace Elab\Csmp;
  */
 class EmptyBlock extends Block
 {
-    public $sorted = true;
+    /**
+     * @var boolean Da li je blok sortiran u nizu sortiranih elemenata u simulaciji.
+     */
+    protected $sorted = true;
 }
