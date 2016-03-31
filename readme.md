@@ -54,6 +54,7 @@ Testovi aplikacije se nalaze u folderu ./tests.
 
 #### Autentikacija
 * `POST /login` - vraća token ako je autentikacija uspešna
+    ```
     Request
     {
         name: string,
@@ -63,43 +64,88 @@ Testovi aplikacije se nalaze u folderu ./tests.
     {
         token: string
     }
+    ```
 
 #### CSMP
 * `GET api/csmp/blocks` - vraća listu dostupnih blokova za simulaciju
+    ```
     Response
-        IMetaJSONBlock[]
+        IMetaCsmpBlock[]
+        ```
 * `GET api/csmp/integrationmethods` - vraća listu dostupnih metoda integracije
+    ```
     Response
-        IMetaJSONMethod[]
+        IMetaCsmpMethod[]
+    ```
 
 ### PROTECTED ROUTES
 
 #### CSMP
-* `POST /csmp/simulate` - pokreće simulaciju, u telu zahteva očekuje IJSONSimulation objekat
+* `POST /csmp/simulate` - pokreće simulaciju, u telu zahteva očekuje ICsmpSimulation objekat
+    ```
     Request
-        IJSONSimulation
+        ICsmpSimulation
     Response
         number[][]
+    ```
 * `GET /csmp/simulation` - vraća listu sačuvanih simulacija za korisnika
+    ```
     Response
         {
         id: number,
         description: string
         }[]
+    ```
 * `GET /csmp/simulation/:id` - vraća simulaciju za zadati id
+    ```
     Response
-        IJSONSimulation
-* `POST /csmp/simulation` - čuva simulaciju, u telu zahteva očekuje IJSONSimulation objekat
+        ICsmpSimulation
+    ```
+* `POST /csmp/simulation` - čuva simulaciju, u telu zahteva očekuje ICsmpSimulation objekat
+    ```
     Request
-        IJSONSimulation
+        ICsmpSimulation
+    ```
 * `DELETE /csmp/simulation/:id` - briše simulaciju za zadati id
+    ```
+    Response
+        {
+        id: number
+        }
+    ```
+
 
 #### GPSS
 * `POST /gpss/simulate` - pokreće simulaciju, u telu zahteva očekuje IGpssSimulation
+    ```
+    Request
+        IGpssSimulation
+    ```    
 * `GET /gpss/simulation` - vraća listu sačuvanih simulacija
+    ```
+    Response
+        {
+        id: number,
+        description: string
+        }[]
+    ```
 * `GET /gpss/simulation/:id` - vraća simulaciju za zadati id
+    ```
+    Response
+        IGpssSimulation
+    ```
 * `POST /gpss/simulation` - čuva simulaciju, u telu zahteva očekuje IGpssSimulation
+    ```
+    Request
+        IGpssSimulation
+    ```
 * `DELETE /gpss/simulation/:id` - briše simulaciju za zadati id
+    ```
+    Response
+        {
+        id: number
+        }
+    ```
 
 ## Autentikacija
 ===================
@@ -121,14 +167,13 @@ Sva logika za CSMP simulaciju nalazi se u folderu Elab/Csmp.
 +config
     blocks.php - niz dostupnih blokova
     methods.php - niz dostupnih metoda
-+Enums
-    BlockType.php - definiše tipove blokova, trenutno se ne koristi
++docs - generisana dokumentacija csmp
 +Exceptions - custom exceptions
++Factories - factory za blokove i metode integracije
 +Helpers
     Numbers.php - pomoćna klasa za rad sa decimalnim brojevima
 +Methods - klase dostupnih metoda integracije
 Block.php - klasa jednog bloka simulacije, svi blokovi se izvode iz ove klase
-EmptyBlock.php - klasa praznog bloka
 IntegrationMethod.php - apstraktna klasa iz koje se izvode sve metode integracije
 IoTService.php - servis za rad sa IoT elementom
 RungeKutta.php - iplementacija generičke RungeKutta metode, sve metode integracije za sada se izvode iz ove klase
@@ -138,9 +183,9 @@ Simulation.php - klasa simulacije
 ### CSMP tipovi
 ===================
 
-IMetaJSONBlock opisuje jedan blok.
+IMetaCsmpBlock opisuje jedan blok.
 ```
-export interface IMetaJSONBlock {
+export interface IMetaCsmpBlock {
 	className: string;
 	numberOfParams: number;
 	numberOfStringParams: number;
@@ -155,22 +200,22 @@ export interface IMetaJSONBlock {
 }
 ```
 
-IJSONSimulation opisuje jednu simulaciju.
+ICsmpSimulation opisuje jednu simulaciju.
 ```
-export interface IJSONSimulation {
+export interface ICsmpSimulation {
 	description: string;
 	date: number;
 	method: string;
 	duration: number;
 	integrationInterval: number;
-	blocks: IJSONBlock[];
+	blocks: ICsmpBlock[];
 	optimizeAsync: boolean;
 }
 ```
 
-IJSONBlock sadrži sve parametre i poziciju bloka.
+ICsmpBlock sadrži sve parametre i poziciju bloka.
 ```
-export interface IJSONBlock {
+export interface ICsmpBlock {
 	className: string;
 	position: IPosition;
 	params: number[];
@@ -180,9 +225,9 @@ export interface IJSONBlock {
 }
 ```
 
-IMetaJSONMethod opisuje jednu metodu integracije.
+IMetaCsmpMethod opisuje jednu metodu integracije.
 ```
-export interface IMetaJSONMethod {
+export interface IMetaCsmpMethod {
     className: string;
     description: string;
 }
@@ -191,7 +236,7 @@ export interface IMetaJSONMethod {
 ### CSMP Internet of Things
 ===================
 
-U folderu webservices se nalaze primeri implementacije web servisa za IoT element.
+U folderu pubic/webservices se nalaze primeri implementacije web servisa za IoT element.
 Prilikom poziva web servisa šalju se parametri bloka, vrednosti ulaza u blok i trenutno vreme izvršavanja simulacije.
 Pošto vrednost ulaza u blok može biti 0 to nije dovoljna informacija da li na tom ulazu u blok zaista postoji ulazni blok,
 iz tog razloga se šalje i niz konekcija koje imaju vrednost indeksa ulaza ako postoji prikačen blok ili -1 ako je ulaz prazan.
