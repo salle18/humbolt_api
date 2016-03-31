@@ -32,13 +32,27 @@ class IoT extends Block
         $this->service = new IoTService($this);
     }
 
+    /**
+     * Provera da li je zadata ispravna adresa webservisa.
+     *
+     * @throws SimulationException
+     */
     public function init()
     {
         if (!$this->stringParams[0]) {
             throw new SimulationException("IoT url ne može biti prazan.");
         }
+        if (!filter_var($this->stringParams[0], FILTER_VALIDATE_URL)) {
+            throw new SimulationException("IoT url nije ispravna url adresa.");
+        }
     }
 
+    /**
+     * Poziva IoTService i postavlja rezultat izračunavanja sa webservisa.
+     * Ukoliko treba optimizivati asinhrone pozive poziva webservis samo ukoliko se trenutno izvršava prvi red u Butcherovoj tabeli.
+     *
+     * @throws \Elab\Csmp\Exceptions\IoTException
+     */
     public function calculateResult()
     {
         if (!$this->simulation->shouldOptimizeAsync() || $this->simulation->getStep() === 1) {
