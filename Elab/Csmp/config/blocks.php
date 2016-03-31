@@ -1,4 +1,7 @@
 <?php
+/**
+ * Niz dostupnih blokova za simuliranje.
+ */
 
 use Elab\Csmp\Blocks\Abs;
 use Elab\Csmp\Blocks\Add;
