@@ -1,11 +1,13 @@
 <?php
+/**
+ * Class Sin
+ */
 
 namespace Elab\Csmp\Blocks;
 
 use Elab\Csmp\Block;
 
 /**
- * Class Sin
  * Sinus ulaza.
  *
  * @package Elab\Csmp\Blocks

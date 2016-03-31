@@ -1,11 +1,13 @@
 <?php
+/**
+ * Class CircuitDelay
+ */
 
 namespace Elab\Csmp\Blocks;
 
 use Elab\Csmp\Block;
 
 /**
- * Class CircuitDelay
  * Ukoliko je ulaz manji od nule vraća 0, ukoliko je veći od 0 vraća ulaz i pamti vrednost,
  * a ukoliko je nula vraća zapamćenu vrednost.
  *

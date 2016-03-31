@@ -1,4 +1,7 @@
 <?php
+/**
+ * Class FunctionGenerator
+ */
 
 namespace Elab\Csmp\Blocks;
 
@@ -6,7 +9,6 @@ use Elab\Csmp\Block;
 use Elab\Csmp\Exceptions\NotImplementedException;
 
 /**
- * Class FunctionGenerator
  * Generator funkcija nije implementiran.
  *
  * @package Elab\Csmp\Blocks

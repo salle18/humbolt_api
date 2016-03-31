@@ -1,11 +1,13 @@
 <?php
+/**
+ * Class Exp
+ */
 
 namespace Elab\Csmp\Blocks;
 
 use Elab\Csmp\Block;
 
 /**
- * Class Exp
  * Eksponent ulaza.
  *
  * @package Elab\Csmp\Blocks

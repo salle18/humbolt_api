@@ -1,11 +1,13 @@
 <?php
+/**
+ * Class Sign
+ */
 
 namespace Elab\Csmp\Blocks;
 
 use Elab\Csmp\Block;
 
 /**
- * Class Sign
  * Znak ulaza.
  *
  * @package Elab\Csmp\Blocks

@@ -1,4 +1,7 @@
 <?php
+/**
+ * Class Divide
+ */
 
 namespace Elab\Csmp\Blocks;
 
@@ -6,7 +9,6 @@ use Elab\Csmp\Block;
 use Elab\Csmp\Exceptions\CalculationException;
 
 /**
- * Class Divide
  * Deli ulaze.
  *
  * @package Elab\Csmp\Blocks

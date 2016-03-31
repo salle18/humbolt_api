@@ -1,11 +1,13 @@
 <?php
+/**
+ * Class Multiply
+ */
 
 namespace Elab\Csmp\Blocks;
 
 use Elab\Csmp\Block;
 
 /**
- * Class Multiply
  * Množi ulaze.
  *
  * @package Elab\Csmp\Blocks

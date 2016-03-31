@@ -1,11 +1,13 @@
 <?php
+/**
+ * Class Amplify
+ */
 
 namespace Elab\Csmp\Blocks;
 
 use Elab\Csmp\Block;
 
 /**
- * Class Amplify
  * Pojačanje ulaza zadatim parametrom.
  *
  * @package Elab\Csmp\Blocks

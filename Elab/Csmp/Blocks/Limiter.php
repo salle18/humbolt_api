@@ -1,11 +1,13 @@
 <?php
+/**
+ * Class Limiter
+ */
 
 namespace Elab\Csmp\Blocks;
 
 use Elab\Csmp\Block;
 
 /**
- * Class Limiter
  * Ograničavač vraća ulaz ukoliko je ulaz između donjeg i gornjeg parametra, a donji i gornji parametar inače.
  *
  * @package Elab\Csmp\Blocks

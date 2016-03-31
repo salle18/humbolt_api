@@ -1,11 +1,13 @@
 <?php
+/**
+ * Class Randomizer
+ */
 
 namespace Elab\Csmp\Blocks;
 
 use Elab\Csmp\Block;
 
 /**
- * Class Randomizer
  * Generator slučajnih brojeva na intervalu [0, 1).
  *
  * @package Elab\Csmp\Blocks

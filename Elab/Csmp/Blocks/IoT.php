@@ -1,4 +1,7 @@
 <?php
+/**
+ * Class IoT
+ */
 
 namespace Elab\Csmp\Blocks;
 
@@ -7,7 +10,6 @@ use Elab\Csmp\Exceptions\SimulationException;
 use Elab\Csmp\IoTService;
 
 /**
- * Class IoT
  * Internet of things računa rezultat na zadatom web servisu i vraća odgovor nakon toga.
  *
  * @package Elab\Csmp\Blocks

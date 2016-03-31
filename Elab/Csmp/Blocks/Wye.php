@@ -1,4 +1,7 @@
 <?php
+/**
+ * Class Wye
+ */
 
 namespace Elab\Csmp\Blocks;
 
@@ -6,7 +9,6 @@ use Elab\Csmp\Block;
 use Elab\Csmp\Exceptions\NotImplementedException;
 
 /**
- * Class Wye
  * Wye nije implementiran.
  *
  * @package Elab\Csmp\Blocks

@@ -1,4 +1,7 @@
 <?php
+/**
+ * Class Quit
+ */
 
 namespace Elab\Csmp\Blocks;
 
@@ -6,7 +9,6 @@ use Elab\Csmp\Block;
 use Elab\Csmp\Exceptions\QuitSimulationException;
 
 /**
- * Class Quit
  * Prekida izvršavanje simulacije.
  *
  * @package Elab\Csmp\Blocks

@@ -1,11 +1,13 @@
 <?php
+/**
+ * Class NegativeLimiter
+ */
 
 namespace Elab\Csmp\Blocks;
 
 use Elab\Csmp\Block;
 
 /**
- * Class NegativeLimiter
  * Negativni ograničavač vraća ulaz ukoliko je veći od nule, a nulu inače.
  *
  * @package Elab\Csmp\Blocks

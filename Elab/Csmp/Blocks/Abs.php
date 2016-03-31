@@ -1,11 +1,13 @@
 <?php
+/**
+ * Class Abs
+ */
 
 namespace Elab\Csmp\Blocks;
 
 use Elab\Csmp\Block;
 
 /**
- * Class Abs
  * Apsolutna vrednost ulaza.
  *
  * @package Elab\Csmp\Blocks
