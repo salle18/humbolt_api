@@ -54,7 +54,7 @@ Testovi aplikacije se nalaze u folderu ./tests.
 
 #### Autentikacija
 * `POST /login` - vraća token ako je autentikacija uspešna
-    ```
+```
     Request
     {
         name: string,
@@ -64,88 +64,88 @@ Testovi aplikacije se nalaze u folderu ./tests.
     {
         token: string
     }
-    ```
+```
 
 #### CSMP
 * `GET api/csmp/blocks` - vraća listu dostupnih blokova za simulaciju
-    ```
+```
     Response
         IMetaCsmpBlock[]
-        ```
+```
 * `GET api/csmp/integrationmethods` - vraća listu dostupnih metoda integracije
-    ```
+```
     Response
         IMetaCsmpMethod[]
-    ```
+```
 
 ### PROTECTED ROUTES
 
 #### CSMP
 * `POST /csmp/simulate` - pokreće simulaciju, u telu zahteva očekuje ICsmpSimulation objekat
-    ```
+```
     Request
         ICsmpSimulation
     Response
         number[][]
-    ```
+```
 * `GET /csmp/simulation` - vraća listu sačuvanih simulacija za korisnika
-    ```
+```
     Response
         {
         id: number,
         description: string
         }[]
-    ```
+```
 * `GET /csmp/simulation/:id` - vraća simulaciju za zadati id
-    ```
+```
     Response
         ICsmpSimulation
-    ```
+```
 * `POST /csmp/simulation` - čuva simulaciju, u telu zahteva očekuje ICsmpSimulation objekat
-    ```
+```
     Request
         ICsmpSimulation
-    ```
+```
 * `DELETE /csmp/simulation/:id` - briše simulaciju za zadati id
-    ```
+```
     Response
         {
         id: number
         }
-    ```
+```
 
 
 #### GPSS
 * `POST /gpss/simulate` - pokreće simulaciju, u telu zahteva očekuje IGpssSimulation
-    ```
+```
     Request
         IGpssSimulation
-    ```    
+```    
 * `GET /gpss/simulation` - vraća listu sačuvanih simulacija
-    ```
+```
     Response
         {
         id: number,
         description: string
         }[]
-    ```
+```
 * `GET /gpss/simulation/:id` - vraća simulaciju za zadati id
-    ```
+```
     Response
         IGpssSimulation
-    ```
+```
 * `POST /gpss/simulation` - čuva simulaciju, u telu zahteva očekuje IGpssSimulation
-    ```
+```
     Request
         IGpssSimulation
-    ```
+```
 * `DELETE /gpss/simulation/:id` - briše simulaciju za zadati id
-    ```
+```
     Response
         {
         id: number
         }
-    ```
+```
 
 ## Autentikacija
 ===================
