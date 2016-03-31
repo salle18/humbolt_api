@@ -1,4 +1,7 @@
 <?php
+/**
+ * Class IntegrationMethodFactory
+ */
 
 namespace Elab\Csmp\Factories;
 
@@ -6,7 +9,6 @@ use Elab\Csmp\Exceptions\BlockNotFoundException;
 use Elab\Csmp\Simulation;
 
 /**
- * Class IntegrationMethodFactory
  * Klasa za instanciranje integracionih metoda.
  *
  * @package Elab\Csmp\Factories

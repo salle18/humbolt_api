@@ -1,4 +1,7 @@
 <?php
+/**
+ * Class BlockFactory
+ */
 
 namespace Elab\Csmp\Factories;
 
@@ -6,7 +9,6 @@ use Elab\Csmp\Block;
 use Elab\Csmp\Exceptions\BlockNotFoundException;
 
 /**
- * Class BlockFactory
  * Klasa za instanciranje blokova.
  *
  * @package Elab\Csmp
