@@ -20,7 +20,7 @@ class FunctionGenerator extends Block
     protected $numberOfParams = 2;
     protected $maxNumberOfInputs = 1;
 
-    public function calculateResult()
+    public function init()
     {
         throw new NotImplementedException("Generator funkcija nije implementiran.");
     }

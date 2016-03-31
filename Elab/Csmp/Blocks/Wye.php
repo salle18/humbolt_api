@@ -20,7 +20,7 @@ class Wye extends Block
     protected $numberOfParams = 2;
     protected $maxNumberOfInputs = 2;
 
-    public function calculateResult()
+    public function init()
     {
         throw new NotImplementedException("Wye blok nije implementiran.");
     }

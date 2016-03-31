@@ -20,7 +20,7 @@ class Vacuous extends Block
     protected $numberOfParams = 1;
     protected $maxNumberOfInputs = 0;
 
-    public function calculateResult()
+    public function init()
     {
         throw new NotImplementedException("Vacuous nije implementirano.");
     }
