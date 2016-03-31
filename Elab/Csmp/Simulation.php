@@ -1,4 +1,7 @@
 <?php
+/**
+ * Class Simulation
+ */
 
 namespace Elab\Csmp;
 
@@ -9,7 +12,6 @@ use Elab\Csmp\Factories\BlockFactory;
 use Elab\Csmp\Factories\IntegrationMethodFactory;
 
 /**
- * Class Simulation
  * Simulacija u sebi sadrži niz blokova, pre simuliranja blokovi se moraju sortirati.
  * Simulacija se možete učitavati i izvoziti u JSON.
  *

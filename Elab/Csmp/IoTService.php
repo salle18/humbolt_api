@@ -1,4 +1,7 @@
 <?php
+/**
+ * Class IoTService
+ */
 
 namespace Elab\Csmp;
 
@@ -7,7 +10,6 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 
 /**
- * Class IoTService
  * Klasa koja se koristi za pozivanje web servisa.
  *
  * @package Elab\Csmp

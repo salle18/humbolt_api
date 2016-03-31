@@ -1,9 +1,13 @@
 <?php
+/*
+ * Class Block
+ */
 
 namespace Elab\Csmp;
 
+use Elab\Csmp\Blocks\EmptyBlock;
+
 /**
- * Class Block
  * Apstraktna klasa, svi csmp blokovi moraju biti izvedeni iz ove klase.
  *
  * @package Elab\Csmp

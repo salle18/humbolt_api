@@ -1,11 +1,13 @@
 <?php
+/**
+ * Class RungeKutta
+ */
 
 namespace Elab\Csmp;
 
 use Elab\Csmp\Blocks\Integrator;
 
 /**
- * Class RungeKutta
  * Generička klasa za sve Runge Kutta integracione metode. Izračunavanje se vrši na osnovu Butcherovih tabela.
  * https://en.wikipedia.org/wiki/Runge%E2%80%93Kutta_methods#Explicit_Runge.E2.80.93Kutta_methods
  *

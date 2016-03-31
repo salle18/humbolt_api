@@ -1,9 +1,11 @@
 <?php
+/**
+ * Class Config
+ */
 
 namespace Elab\Csmp;
 
 /**
- * Class Config
  * Klasa koja se koristi za učitavanje dostupnih blokova i metoda integracije.
  *
  * @package Elab\Csmp
