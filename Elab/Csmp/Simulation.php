@@ -343,6 +343,11 @@ class Simulation
         $this->step = $step;
     }
 
+    /**
+     * Vraća da li treba optimizovati asinhrone pozive IoT elementa.
+     *
+     * @return boolean
+     */
     public function shouldOptimizeAsync()
     {
         return $this->optimizeAsync;
