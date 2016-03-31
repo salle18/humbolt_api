@@ -1,9 +1,12 @@
 <?php
+/**
+ * Class BlockNotFoundException
+ */
 
 namespace Elab\Csmp\Exceptions;
 
 /**
- * Class BlockNotFoundException
+ * Izuzetak u slučaju kada ne postoji blok sa zadatim nazivom klase.
  * @package Elab\Csmp\Exceptions
  */
 class BlockNotFoundException extends CsmpException {}

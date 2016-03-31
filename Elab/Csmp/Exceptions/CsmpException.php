@@ -1,9 +1,12 @@
 <?php
+/**
+ * Class CsmpException
+ */
 
 namespace Elab\Csmp\Exceptions;
 
 /**
- * Class CsmpException
+ * Opšti csmp izuzetak, svi izuzeci za csmp se izvode iz ove klase.
  * @package Elab\Csmp\Exceptions
  */
 class CsmpException extends \Exception {}

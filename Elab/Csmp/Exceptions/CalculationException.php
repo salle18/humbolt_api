@@ -1,9 +1,12 @@
 <?php
+/**
+ * Class CalculationException
+ */
 
 namespace Elab\Csmp\Exceptions;
 
 /**
- * Class CalculationException
+ * Izuzetak tokom izračunavanja simulacije.
  * @package Elab\Csmp\Exceptions
  */
 class CalculationException extends CsmpException {}

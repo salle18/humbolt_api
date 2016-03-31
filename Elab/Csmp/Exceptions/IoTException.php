@@ -1,9 +1,12 @@
 <?php
+/**
+ * Class IoTException
+ */
 
 namespace Elab\Csmp\Exceptions;
 
 /**
- * Class IoTException
+ * Izuzetak u slučaju greške prilikom pozivanja web servisa.
  * @package Elab\Csmp\Exceptions
  */
 class IoTException extends CsmpException {}
