@@ -1,0 +1,89 @@
+<?php
+/**
+ * Class ImpulseGenerator
+ */
+
+namespace Elab\Csmp\Blocks;
+
+use Elab\Csmp\Block;
+use Elab\Csmp\Exceptions\CalculationException;
+use Elab\Csmp\helpers\Numbers;
+
+/**
+ * Generator impulsa. Generiše povorku impulsa od trenutka kada je ulaz veći od nule.
+ *
+ * @package Elab\Csmp\Blocks
+ */
+class ImpulseGenerator extends Block
+{
+    /**
+     * {@inheritdoc}
+     */
+    protected $sign = "Y";
+    /**
+     * {@inheritdoc}
+     */
+    protected $description = "Generator impulsa";
+    /**
+     * {@inheritdoc}
+     */
+    protected $className = "ImpulseGenerator";
+    /**
+     * {@inheritdoc}
+     */
+    protected $info = "Generator impulsa";
+    /**
+     * {@inheritdoc}
+     */
+    protected $numberOfParams = 1;
+    /**
+     * {@inheritdoc}
+     */
+    protected $maxNumberOfInputs = 1;
+    /**
+     * @var boolean Da li generator treba da generiše.
+     */
+    private $generate = false;
+    /**
+     * @var float Interval u kome treba da se generiše impuls.
+     */
+    private $interval = 0;
+    /**
+     * @var float Početno vreme kada generator počinje da emituje impulse.
+     */
+    private $startInterval = 0;
+
+    /**
+     * {@inheritdoc}
+     * Proverava da li je interval impulsa umnožak intervala integracije.
+     *
+     * @throws CalculationException
+     */
+    public function init()
+    {
+        $this->result = 0;
+        $this->interval = $this->params[0];
+        if (!Numbers::divideable($this->interval, $this->simulation->getIntegrationInterval())) {
+            throw new CalculationException("Interval generatora impulsa treba da bude umnožak intervala integracije.");
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function calculateResult()
+    {
+        if ($this->generate) {
+            if (Numbers::divideable($this->simulation->getTimer() - $this->startInterval, $this->interval)) {
+                $this->result = 1;
+            } else {
+                $this->result = 0;
+            }
+        } else if ($this->inputs[0]->result > 0) {
+            $this->generate = true;
+            $this->startInterval = $this->simulation->getTimer();
+            $this->calculateResult();
+        }
+    }
+}
+

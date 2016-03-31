@@ -1,0 +1,54 @@
+<?php
+/**
+ * Class Relay
+ */
+
+namespace Elab\Csmp\Blocks;
+
+use Elab\Csmp\Block;
+
+/**
+ * Vraća drugi ili treći ulaz zavisno da li je prvi ulaz veći od nule.
+ *
+ * @package Elab\Csmp\Blocks
+ */
+class Relay extends Block
+{
+    /**
+     * {@inheritdoc}
+     */
+    protected $sign = "R";
+    /**
+     * {@inheritdoc}
+     */
+    protected $description = "Relej";
+    /**
+     * {@inheritdoc}
+     */
+    protected $className = "Relay";
+    /**
+     * {@inheritdoc}
+     */
+    protected $info = "Relej, O=E3 za E1<0, inače O=E2";
+    /**
+     * {@inheritdoc}
+     */
+    protected $numberOfParams = 0;
+    /**
+     * {@inheritdoc}
+     */
+    protected $maxNumberOfInputs = 3;
+
+    /**
+     * {@inheritdoc}
+     */
+    public function calculateResult()
+    {
+        if ($this->inputs[0]->result < 0) {
+            $this->result = $this->inputs[2]->result;
+        } else {
+            $this->result = $this->inputs[1]->result;
+        }
+    }
+}
+

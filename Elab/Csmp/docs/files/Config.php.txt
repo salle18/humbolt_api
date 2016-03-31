@@ -1,0 +1,40 @@
+<?php
+/**
+ * Class Config
+ */
+
+namespace Elab\Csmp;
+
+/**
+ * Klasa koja se koristi za učitavanje dostupnih blokova i metoda integracije.
+ *
+ * @package Elab\Csmp
+ */
+class Config
+{
+
+    /**
+     * Vraća niz dostupnih methoda integracije.
+     *
+     * @return IntegrationMethod[]
+     */
+    public function methods()
+    {
+        return array_map(function ($qualifiedClassName) {
+            return new $qualifiedClassName();
+        }, require "config/methods.php");
+    }
+
+    /**
+     * Vraća niz dostupnih blokova.
+     *
+     * @return Block[]
+     */
+    public function blocks()
+    {
+        return array_map(function ($qualifiedClassName) {
+            return new $qualifiedClassName();
+        }, require "config/blocks.php");
+    }
+
+}
