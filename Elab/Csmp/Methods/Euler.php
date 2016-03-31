@@ -1,11 +1,13 @@
 <?php
+/**
+ * Class Euler
+ */
 
 namespace Elab\Csmp\Methods;
 
 use Elab\Csmp\RungeKutta;
 
 /**
- * Class Euler
  * Euler metoda Runge Kutta prvog reda.
  *
  * @package Elab\Csmp\Methods

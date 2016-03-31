@@ -1,11 +1,13 @@
 <?php
+/**
+ * Class Ralston
+ */
 
 namespace Elab\Csmp\Methods;
 
 use Elab\Csmp\RungeKutta;
 
 /**
- * Class Ralston
  * Ralston metoda Runge Kutta drugog reda.
  *
  * @package Elab\Csmp\Methods

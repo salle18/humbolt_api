@@ -1,11 +1,13 @@
 <?php
+/**
+ * Class Heun
+ */
 
 namespace Elab\Csmp\Methods;
 
 use Elab\Csmp\RungeKutta;
 
 /**
- * Class Heun
  * Heun metoda Runge Kutta drugog reda.
  *
  * @package Elab\Csmp\Methods

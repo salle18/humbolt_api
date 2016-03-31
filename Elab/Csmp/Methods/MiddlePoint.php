@@ -1,11 +1,13 @@
 <?php
+/**
+ * Class MiddlePoint
+ */
 
 namespace Elab\Csmp\Methods;
 
 use Elab\Csmp\RungeKutta;
 
 /**
- * Class MiddlePoint
  * Srednja tačka Runge Kutta metoda drugog reda.
  *
  * @package Elab\Csmp\Methods

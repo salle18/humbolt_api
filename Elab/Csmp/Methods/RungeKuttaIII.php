@@ -1,11 +1,13 @@
 <?php
+/**
+ * Class RungeKuttaIII
+ */
 
 namespace Elab\Csmp\Methods;
 
 use Elab\Csmp\RungeKutta;
 
 /**
- * Class RungeKuttaIII
  * Klasična Runge Kutta metoda trećeg reda.
  *
  * @package Elab\Csmp\Methods
