@@ -25,6 +25,6 @@ class Divide extends Block
         if ($this->inputs[1]->result === 0) {
             throw new CalculationException("Divider nedozvoljeno deljenje nulom.");
         }
-        $this->result = $this->inputs[0]->result / $this->inputs[1]->result;
+        $this->result = $this->inputs[0]->result / (float)$this->inputs[1]->result;
     }
 }
