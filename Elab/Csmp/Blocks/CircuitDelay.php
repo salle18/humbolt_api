@@ -15,13 +15,34 @@ use Elab\Csmp\Block;
  */
 class CircuitDelay extends Block
 {
+    /**
+     * {@inheritdoc}
+     */
     protected $sign = "Z";
+    /**
+     * {@inheritdoc}
+     */
     protected $description = "Kolo zadrške";
+    /**
+     * {@inheritdoc}
+     */
     protected $className = "CircuitDelay";
+    /**
+     * {@inheritdoc}
+     */
     protected $info = "Kolo zadrške, O=0 za E2<0, O=E1 za E2>0 i memoriše se vrednost, inače je memorisana vrednost";
+    /**
+     * {@inheritdoc}
+     */
     protected $numberOfParams = 0;
+    /**
+     * {@inheritdoc}
+     */
     protected $maxNumberOfInputs = 2;
 
+    /**
+     * {@inheritdoc}
+     */
     public function calculateResult()
     {
         if ($this->inputs[1]->result < 0) {

@@ -16,7 +16,7 @@ use Elab\Csmp\Block;
 class EmptyBlock extends Block
 {
     /**
-     * @var boolean Da li je blok sortiran u nizu sortiranih elemenata u simulaciji.
+     * {@inheritdoc}
      */
     protected $sorted = true;
 }

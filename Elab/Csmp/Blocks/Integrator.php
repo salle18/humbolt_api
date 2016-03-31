@@ -15,12 +15,33 @@ use Elab\Csmp\Block;
  */
 class Integrator extends Block
 {
+    /**
+     * {@inheritdoc}
+     */
     protected $sign = "I";
+    /**
+     * {@inheritdoc}
+     */
     protected $description = "Integrator";
+    /**
+     * {@inheritdoc}
+     */
     protected $className = "Integrator";
+    /**
+     * @var float Među vrednost izračunavanja vrednosti integratora.
+     */
     protected $intermediate = 0;
+    /**
+     * {@inheritdoc}
+     */
     protected $info = "Integrator";
+    /**
+     * {@inheritdoc}
+     */
     protected $numberOfParams = 3;
+    /**
+     * {@inheritdoc}
+     */
     protected $maxNumberOfInputs = 3;
 
     /**
@@ -29,6 +50,7 @@ class Integrator extends Block
     private $increments;
 
     /**
+     * {@inheritdoc}
      * Inicijalizuje integrator.
      */
     public function init()
@@ -50,6 +72,7 @@ class Integrator extends Block
     }
 
     /**
+     * {@inheritdoc}
      * Postavlja među vrednost.
      */
     public function calculateResult()

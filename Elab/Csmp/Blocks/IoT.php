@@ -16,18 +16,54 @@ use Elab\Csmp\IoTService;
  */
 class IoT extends Block
 {
+    /**
+     * {@inheritdoc}
+     */
     public $stringParams = [""];
+    /**
+     * {@inheritdoc}
+     */
     public $isAsync = true;
+    /**
+     * {@inheritdoc}
+     */
     protected $sign = "IoT";
+    /**
+     * {@inheritdoc}
+     */
     protected $description = "Internet of Things";
+    /**
+     * {@inheritdoc}
+     */
     protected $className = "IoT";
+    /**
+     * {@inheritdoc}
+     */
     protected $info = "IoT, poziva zadati web servis da bi dobio rezultat";
+    /**
+     * {@inheritdoc}
+     */
     protected $numberOfParams = 3;
+    /**
+     * {@inheritdoc}
+     */
     protected $maxNumberOfInputs = 3;
+    /**
+     * {@inheritdoc}
+     */
     protected $numberOfStringParams = 1;
+    /**
+     * {@inheritdoc}
+     */
     protected $stringParamDescription = ["url"];
+    /**
+     * @var IoTService Servis koji poziva webservis na kome se vrši izračunavanje.
+     */
     private $service;
 
+    /**
+     * {@inheritdoc}
+     */
     public function __construct()
     {
         parent::__construct();
@@ -35,6 +71,7 @@ class IoT extends Block
     }
 
     /**
+     * {@inheritdoc}
      * Provera da li je zadata ispravna adresa webservisa.
      *
      * @throws SimulationException
@@ -50,6 +87,7 @@ class IoT extends Block
     }
 
     /**
+     * {@inheritdoc}
      * Poziva IoTService i postavlja rezultat izračunavanja sa webservisa.
      * Ukoliko treba optimizivati asinhrone pozive poziva webservis samo ukoliko se trenutno izvršava prvi red u Butcherovoj tabeli.
      *

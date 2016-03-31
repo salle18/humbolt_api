@@ -16,27 +16,61 @@ use Elab\Csmp\helpers\Numbers;
  */
 class ImpulseGenerator extends Block
 {
+    /**
+     * {@inheritdoc}
+     */
     protected $sign = "Y";
+    /**
+     * {@inheritdoc}
+     */
     protected $description = "Generator impulsa";
+    /**
+     * {@inheritdoc}
+     */
     protected $className = "ImpulseGenerator";
+    /**
+     * {@inheritdoc}
+     */
     protected $info = "Generator impulsa";
+    /**
+     * {@inheritdoc}
+     */
     protected $numberOfParams = 1;
+    /**
+     * {@inheritdoc}
+     */
     protected $maxNumberOfInputs = 1;
+    /**
+     * @var boolean Da li generator treba da generiše.
+     */
     private $generate = false;
+    /**
+     * @var float Interval u kome treba da se generiše impuls.
+     */
     private $interval = 0;
+    /**
+     * @var float Početno vreme kada generator počinje da emituje impulse.
+     */
     private $startInterval = 0;
 
-
+    /**
+     * {@inheritdoc}
+     * Proverava da li je interval impulsa umnožak intervala integracije.
+     *
+     * @throws CalculationException
+     */
     public function init()
     {
         $this->result = 0;
         $this->interval = $this->params[0];
-        $this->startInterval = 0;
         if (!Numbers::divideable($this->interval, $this->simulation->getIntegrationInterval())) {
             throw new CalculationException("Interval generatora impulsa treba da bude umnožak intervala integracije.");
         }
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function calculateResult()
     {
         if ($this->generate) {

@@ -14,13 +14,34 @@ use Elab\Csmp\Block;
  */
 class Relay extends Block
 {
+    /**
+     * {@inheritdoc}
+     */
     protected $sign = "R";
+    /**
+     * {@inheritdoc}
+     */
     protected $description = "Relej";
+    /**
+     * {@inheritdoc}
+     */
     protected $className = "Relay";
+    /**
+     * {@inheritdoc}
+     */
     protected $info = "Relej, O=E3 za E1<0, inače O=E2";
+    /**
+     * {@inheritdoc}
+     */
     protected $numberOfParams = 0;
+    /**
+     * {@inheritdoc}
+     */
     protected $maxNumberOfInputs = 3;
 
+    /**
+     * {@inheritdoc}
+     */
     public function calculateResult()
     {
         if ($this->inputs[0]->result < 0) {

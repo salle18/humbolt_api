@@ -15,14 +15,40 @@ use Elab\Csmp\Exceptions\QuitSimulationException;
  */
 class Quit extends Block
 {
+    /**
+     * {@inheritdoc}
+     */
     protected $sign = "Q";
+    /**
+     * {@inheritdoc}
+     */
     protected $description = "Quit";
+    /**
+     * {@inheritdoc}
+     */
     protected $className = "Quit";
+    /**
+     * {@inheritdoc}
+     */
     protected $hasOutput = false;
+    /**
+     * {@inheritdoc}
+     */
     protected $info = "Prekid izvršavanja simulacije ukoliko je E2<E1";
+    /**
+     * {@inheritdoc}
+     */
     protected $numberOfParams = 0;
+    /**
+     * {@inheritdoc}
+     */
     protected $maxNumberOfInputs = 2;
 
+    /**
+     * {@inheritdoc}
+     *
+     * @throws QuitSimulationException
+     */
     public function calculateResult()
     {
         if ($this->inputs[1]->result < $this->inputs[0]->result) {

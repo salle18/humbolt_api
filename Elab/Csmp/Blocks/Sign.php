@@ -14,13 +14,34 @@ use Elab\Csmp\Block;
  */
 class Sign extends Block
 {
+    /**
+     * {@inheritdoc}
+     */
     protected $sign = "B";
+    /**
+     * {@inheritdoc}
+     */
     protected $description = "Sign";
+    /**
+     * {@inheritdoc}
+     */
     protected $className = "Sign";
+    /**
+     * {@inheritdoc}
+     */
     protected $info = "Znak ulaza, O=sgn(E1)";
+    /**
+     * {@inheritdoc}
+     */
     protected $numberOfParams = 0;
+    /**
+     * {@inheritdoc}
+     */
     protected $maxNumberOfInputs = 1;
 
+    /**
+     * {@inheritdoc}
+     */
     public function calculateResult()
     {
         if ($this->inputs[0]->result > 0) {

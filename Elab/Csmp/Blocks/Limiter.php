@@ -14,13 +14,34 @@ use Elab\Csmp\Block;
  */
 class Limiter extends Block
 {
+    /**
+     * {@inheritdoc}
+     */
     protected $sign = "L";
+    /**
+     * {@inheritdoc}
+     */
     protected $description = "Ograničavač";
+    /**
+     * {@inheritdoc}
+     */
     protected $className = "Limiter";
+    /**
+     * {@inheritdoc}
+     */
     protected $info = "Ograničavač, O=P1 za O<P1, O=P2 za O>P2, inače O=E1";
+    /**
+     * {@inheritdoc}
+     */
     protected $numberOfParams = 2;
+    /**
+     * {@inheritdoc}
+     */
     protected $maxNumberOfInputs = 1;
 
+    /**
+     * {@inheritdoc}
+     */
     public function calculateResult()
     {
         if ($this->inputs[0]->result < $this->params[0]) {
