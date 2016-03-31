@@ -2,6 +2,9 @@
 
 use Elab\Csmp\Blocks\Constant;
 
+/**
+ * Class ConstantTest
+ */
 class ConstantTest extends CsmpTest
 {
 

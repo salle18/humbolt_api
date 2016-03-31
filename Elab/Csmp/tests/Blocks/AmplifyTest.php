@@ -2,6 +2,9 @@
 
 use Elab\Csmp\Blocks\Amplify;
 
+/**
+ * Class AmplifyTest
+ */
 class AmplifyTest extends CsmpTest
 {
 

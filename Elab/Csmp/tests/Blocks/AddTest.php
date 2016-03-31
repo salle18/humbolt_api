@@ -2,6 +2,9 @@
 
 use Elab\Csmp\Blocks\Add;
 
+/**
+ * Class AddTest
+ */
 class AddTest extends CsmpTest
 {
 

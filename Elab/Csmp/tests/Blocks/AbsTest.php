@@ -2,6 +2,9 @@
 
 use Elab\Csmp\Blocks\Abs;
 
+/**
+ * Class AbsTest
+ */
 class AbsTest extends CsmpTest
 {
 
