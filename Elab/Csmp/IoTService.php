@@ -5,6 +5,7 @@
 
 namespace Elab\Csmp;
 
+use Elab\Csmp\Blocks\EmptyBlock;
 use Elab\Csmp\Exceptions\IoTException;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;

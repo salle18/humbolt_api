@@ -6,6 +6,7 @@
 namespace Elab\Csmp;
 
 use Elab\Csmp\blocks\Constant;
+use Elab\Csmp\Blocks\EmptyBlock;
 use Elab\Csmp\blocks\Integrator;
 use Elab\Csmp\exceptions\SimulationException;
 use Elab\Csmp\Factories\BlockFactory;
