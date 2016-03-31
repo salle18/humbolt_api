@@ -1,9 +1,11 @@
 <?php
+/**
+ * Class Numbers
+ */
 
 namespace Elab\Csmp\helpers;
 
 /**
- * Class Numbers
  * Klasa za rad sa point float brojevima.
  *
  * @package Elab\Csmp\helpers
