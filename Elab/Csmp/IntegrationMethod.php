@@ -26,7 +26,8 @@ abstract class IntegrationMethod implements \JsonSerializable
     protected $className = "IntegrationMethod";
 
     /**
-     * @param Simulation $simulation
+     * IntegrationMethod constructor.
+     * @param Simulation|null $simulation
      */
     public function __construct(Simulation $simulation = null)
     {

@@ -23,10 +23,14 @@ class IoTService
      */
     private $block;
     /**
-     * @var Client
+     * @var Client GuzzleHttp Client koji poziva webservis.
      */
     private $client;
 
+    /**
+     * IoTService constructor.
+     * @param Block $block
+     */
     public function __construct(Block $block)
     {
         $this->block = $block;

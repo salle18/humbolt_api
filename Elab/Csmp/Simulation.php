@@ -65,14 +65,17 @@ class Simulation
      */
     private $step = 0;
     /**
-     * @var IntegrationMethodFactory
+     * @var IntegrationMethodFactory Factory za metode integracije.
      */
     private $integrationMethodFactory;
     /**
-     * @var BlockFactory
+     * @var BlockFactory Factory za blokove.
      */
     private $blockFactory;
 
+    /**
+     * Simulation constructor.
+     */
     public function __construct()
     {
         $this->integrationMethodFactory = new IntegrationMethodFactory();
