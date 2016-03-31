@@ -22,7 +22,7 @@ class Divide extends Block
 
     public function calculateResult()
     {
-        if ($this->inputs[1]->result === 0) {
+        if ($this->inputs[1]->result === 0 || $this->inputs[1]->result === 0.0) {
             throw new CalculationException("Divider nedozvoljeno deljenje nulom.");
         }
         $this->result = $this->inputs[0]->result / (float)$this->inputs[1]->result;
