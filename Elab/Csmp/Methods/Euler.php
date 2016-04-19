@@ -15,18 +15,16 @@ use Elab\Csmp\RungeKutta;
 class Euler extends RungeKutta
 {
     /**
-     * @var string Opis metode integracije.
+     * {@inheritdoc}
      */
     protected $description = "Euler";
     /**
-     * @var string Naziv klase metode integracije.
+     * {@inheritdoc}
      */
     protected $className = "Euler";
 
     /**
-     * Vraća Butcherovu tabelu za metodu.
-     *
-     * @return float[][]
+     * {@inheritdoc}
      */
     public function getTable()
     {

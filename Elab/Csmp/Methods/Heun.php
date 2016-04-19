@@ -15,18 +15,16 @@ use Elab\Csmp\RungeKutta;
 class Heun extends RungeKutta
 {
     /**
-     * @var string Opis metode integracije.
+     * {@inheritdoc}
      */
     protected $description = "Heun";
     /**
-     * @var string Naziv klase metode integracije.
+     * {@inheritdoc}
      */
     protected $className = "Heun";
 
     /**
-     * Vraća Butcherovu tabelu za metodu.
-     *
-     * @return float[][]
+     * {@inheritdoc}
      */
     public function getTable()
     {

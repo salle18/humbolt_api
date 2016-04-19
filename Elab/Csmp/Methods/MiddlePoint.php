@@ -15,18 +15,16 @@ use Elab\Csmp\RungeKutta;
 class MiddlePoint extends RungeKutta
 {
     /**
-     * @var string Opis metode integracije.
+     * {@inheritdoc}
      */
     protected $description = "Metoda srednje tačke";
     /**
-     * @var string Naziv klase metode integracije.
+     * {@inheritdoc}
      */
     protected $className = "MiddlePoint";
 
     /**
-     * Vraća Butcherovu tabelu za metodu.
-     *
-     * @return float[][]
+     * {@inheritdoc}
      */
     public function getTable()
     {

@@ -15,18 +15,16 @@ use Elab\Csmp\RungeKutta;
 class RungeKuttaIV38 extends RungeKutta
 {
     /**
-     * @var string Opis metode integracije.
+     * {@inheritdoc}
      */
     protected $description = "Runge Kutta IV 3/8";
     /**
-     * @var string Naziv klase metode integracije.
+     * {@inheritdoc}
      */
     protected $className = "RungeKuttaIV38";
 
     /**
-     * Vraća Butcherovu tabelu za metodu.
-     *
-     * @return float[][]
+     * {@inheritdoc}
      */
     public function getTable()
     {

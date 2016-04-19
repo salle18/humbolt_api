@@ -15,18 +15,16 @@ use Elab\Csmp\RungeKutta;
 class Ralston extends RungeKutta
 {
     /**
-     * @var string Opis metode integracije.
+     * {@inheritdoc}
      */
     protected $description = "Ralston";
     /**
-     * @var string Naziv klase metode integracije.
+     * {@inheritdoc}
      */
     protected $className = "Ralston";
 
     /**
-     * Vraća Butcherovu tabelu za metodu.
-     *
-     * @return float[][]
+     * {@inheritdoc}
      */
     public function getTable()
     {
